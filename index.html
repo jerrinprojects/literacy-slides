@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spelling Lists 23–33</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;font-family:'Segoe UI',Arial,sans-serif;}
+body{background:#f4f0fc;}
+
+/* ── MAIN PAGE ── */
+#main{
+  display:flex;flex-direction:column;align-items:center;
+  min-height:100vh;padding:52px 24px 80px;
+}
+#main h1{font-size:3rem;color:#3b0764;margin-bottom:8px;text-align:center;font-weight:800;}
+#main .sub{font-size:1.2rem;color:#7c3aed;margin-bottom:48px;}
+.grid{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;max-width:960px;}
+
+.card{
+  background:#fff;border-radius:22px;padding:32px 26px;width:210px;
+  text-align:center;cursor:pointer;
+  box-shadow:0 6px 26px rgba(100,50,200,.12);
+  transition:transform .18s,box-shadow .18s;
+  border:3px solid transparent;
+}
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 16px 40px rgba(100,50,200,.22);
+  border-color:var(--c);
+}
+.card .badge{
+  display:inline-block;color:#fff;font-size:.82rem;font-weight:700;
+  padding:5px 16px;border-radius:20px;background:var(--c);
+  margin-bottom:14px;letter-spacing:.05em;
+}
+.card h2{font-size:1.05rem;color:#1e1e2e;line-height:1.45;margin-bottom:6px;font-weight:700;}
+.card p{font-size:.85rem;color:#888;line-height:1.4;}
+.card .arr{font-size:1.6rem;margin-top:12px;display:block;transition:transform .18s;color:var(--c);}
+.card:hover .arr{transform:translateX(6px);}
+
+/* ── SLIDE VIEW ── */
+#sv{display:none;position:fixed;inset:0;background:#fff;flex-direction:column;}
+
+/* top bar */
+.topbar{
+  display:flex;align-items:center;padding:14px 22px;gap:14px;
+  border-bottom:2px solid #e5e7eb;background:#fff;flex-shrink:0;
+}
+.btn-back{
+  background:#f3f4f6;color:#374151;border:none;border-radius:10px;
+  padding:9px 20px;font-size:1rem;cursor:pointer;font-weight:600;
+  transition:background .15s;
+}
+.btn-back:hover{background:#e5e7eb;}
+.topbar-title{
+  flex:1;text-align:center;color:#374151;font-size:1rem;font-weight:700;
+  letter-spacing:.02em;
+}
+.topbar-count{color:#9ca3af;font-size:.9rem;min-width:64px;text-align:right;font-weight:600;}
+
+/* stage — fills all remaining height */
+.stage{
+  flex:1;display:flex;align-items:stretch;justify-content:center;
+  overflow:hidden;padding:0;
+}
+
+/* every slide fills the stage */
+.slide-wrap{
+  width:100%;display:flex;align-items:center;justify-content:center;
+  padding:32px 40px;animation:pop .22s ease;
+}
+@keyframes pop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+
+/* ── TITLE SLIDE ── */
+.sl-title{
+  background:#fff;width:100%;max-width:860px;
+  text-align:center;
+}
+.sl-title .list-num{
+  font-size:1.1rem;font-weight:700;color:#fff;
+  display:inline-block;padding:6px 22px;border-radius:30px;
+  margin-bottom:24px;letter-spacing:.06em;
+}
+.sl-title h2{
+  font-size:clamp(2.4rem,5vw,4rem);font-weight:800;
+  color:#111827;margin-bottom:20px;line-height:1.15;
+}
+.sl-title .rule{
+  font-size:clamp(1.2rem,2.2vw,1.6rem);color:#4b5563;
+  line-height:1.65;max-width:680px;margin:0 auto;
+}
+
+/* ── SECTION SLIDE ── */
+.sl-section{
+  background:#fff;width:100%;max-width:860px;text-align:center;
+}
+.sl-section .sec-label{
+  font-size:clamp(1rem,1.8vw,1.3rem);font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:18px;
+}
+.sl-section h3{
+  font-size:clamp(2.2rem,5vw,4rem);font-weight:800;
+  line-height:1.2;color:#111827;
+}
+.sl-section .sec-sub{
+  font-size:clamp(1.1rem,2vw,1.5rem);color:#6b7280;margin-top:18px;
+}
+
+/* ── WORD SLIDE ── */
+.sl-word{
+  background:#fff;width:100%;max-width:960px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+}
+.sl-word .list-tag{
+  font-size:1rem;font-weight:700;color:#fff;
+  padding:5px 18px;border-radius:20px;margin-bottom:28px;letter-spacing:.05em;
+}
+.sl-word .the-word{
+  font-weight:800;line-height:1.05;color:#111827;
+  /* font-size set by JS */
+}
+.sl-word .hl{font-weight:900;}   /* color set by JS */
+.sl-word .sub-text{
+  font-size:clamp(1.2rem,2.5vw,1.8rem);color:#6b7280;
+  margin-top:22px;font-weight:500;
+}
+.sl-word .parts{
+  margin-top:18px;font-size:clamp(1.1rem,2.2vw,1.6rem);color:#9ca3af;
+  font-weight:600;
+}
+.sl-word .parts .p1{font-weight:700;}
+.sl-word .parts .p2{font-weight:700;}
+
+/* ── NAV ── */
+.nav{
+  display:flex;align-items:center;justify-content:center;gap:20px;
+  padding:14px 22px;border-top:2px solid #e5e7eb;
+  background:#fff;flex-shrink:0;
+}
+.btn-nav{
+  background:#f3f4f6;color:#374151;border:2px solid #e5e7eb;
+  border-radius:12px;padding:12px 30px;font-size:1.05rem;
+  cursor:pointer;font-weight:700;transition:background .15s,border-color .15s;
+  min-width:110px;
+}
+.btn-nav:hover:not(:disabled){background:#e5e7eb;border-color:#d1d5db;}
+.btn-nav:disabled{opacity:.3;cursor:default;}
+.dots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;max-width:280px;}
+.dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#e5e7eb;cursor:pointer;flex-shrink:0;
+  transition:background .18s,transform .18s;
+}
+.dot.on{transform:scale(1.4);}
+
+@media(max-width:540px){
+  .slide-wrap{padding:20px 16px;}
+  .btn-nav{padding:10px 18px;font-size:.95rem;min-width:80px;}
+  .topbar-title{font-size:.85rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- MAIN PAGE -->
+<div id="main">
+  <h1>Spelling Lists</h1>
+  <p class="sub">Year 3 · Lists 23 – 33</p>
+  <div class="grid" id="cards"></div>
+</div>
+
+<!-- SLIDE VIEW -->
+<div id="sv">
+  <div class="topbar">
+    <button class="btn-back" onclick="closeSlides()">← Back</button>
+    <div class="topbar-title" id="sv-title"></div>
+    <div class="topbar-count" id="sv-count"></div>
+  </div>
+  <div class="stage" id="stage"></div>
+  <div class="nav">
+    <button class="btn-nav" id="bprev" onclick="go(-1)">Prev</button>
+    <div class="dots" id="dots"></div>
+    <button class="btn-nav" id="bnext" onclick="go(1)">Next</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  DATA
+// ══════════════════════════════════════════════════════
+// slide items:
+//   "word"                     → plain word slide
+//   {s:"text"}                 → section divider
+//   {w:"word", sub:"origin"}   → word + small subtitle (contractions)
+//   {w:"word", p:["a","b"]}    → compound word with visible join
+//   {w:"word", syl:"a·b"}      → word with syllable split shown
+
+const LISTS = [
+{
+  num:23, title:"Vowel Team 'oo'",
+  rule:"The vowel team 'oo' can make two sounds.\n'oo' as in 'good' (short) and 'oo' as in 'food' (long).",
+  accent:"#2563eb", hlColor:"#1d4ed8", hl:"oo",
+  slides:[
+    {s:"'oo' as in good — short sound"},
+    "good","shook","stood","cool","hook","hood","foot","look",
+    "took","wool","book","school","wood","brook","cook","nook",
+    "crook","soot","cookbook","outlook",
+    {s:"'oo' as in food — long sound"},
+    "food","moon","roof","room","shoot","boom","soon","zoom",
+    "gloom","too","spoon","root","balloon","igloo","kangaroo",
+    "bloom","broom","pool","fool","stool","drool","spool","tooth","smooth"
+  ]
+},
+{
+  num:24, title:"Compound Words 2",
+  rule:"Two words joined together to make a new word with a new meaning.",
+  accent:"#16a34a", hlColor:"#15803d", hl:null,
+  slides:[
+    {s:"every- words"},
+    {w:"everything",p:["every","thing"]},{w:"everybody",p:["every","body"]},
+    {w:"everyone",p:["every","one"]},{w:"everywhere",p:["every","where"]},
+    {s:"some- words"},
+    {w:"something",p:["some","thing"]},{w:"sometimes",p:["some","times"]},
+    {w:"someone",p:["some","one"]},{w:"somewhere",p:["some","where"]},
+    {s:"any- words"},
+    {w:"anything",p:["any","thing"]},{w:"anytime",p:["any","time"]},
+    {w:"anyone",p:["any","one"]},{w:"anywhere",p:["any","where"]},
+    {s:"no- words"},
+    {w:"nothing",p:["no","thing"]},{w:"nobody",p:["no","body"]},{w:"nowhere",p:["no","where"]},
+    {s:"more compound words"},
+    {w:"sunshine",p:["sun","shine"]},{w:"birthday",p:["birth","day"]},
+    {w:"bedroom",p:["bed","room"]},{w:"football",p:["foot","ball"]},
+    {w:"outside",p:["out","side"]},{w:"inside",p:["in","side"]},
+    {w:"rainbow",p:["rain","bow"]},{w:"starfish",p:["star","fish"]},
+    {w:"waterfall",p:["water","fall"]},{w:"butterfly",p:["butter","fly"]},
+    {w:"playground",p:["play","ground"]},{w:"sunflower",p:["sun","flower"]},
+    {w:"daydream",p:["day","dream"]},{w:"seashell",p:["sea","shell"]}
+  ]
+},
+{
+  num:25, title:"3-Letter Consonant Clusters",
+  rule:"Each letter in the cluster keeps its own individual sound.\nClusters: str · spr · scr · spl",
+  accent:"#b45309", hlColor:"#92400e", hl:null,
+  hlFn: w=>{
+    for(const c of ["str","spr","scr","spl"]) if(w.startsWith(c)) return c;
+    return null;
+  },
+  slides:[
+    {s:"str — strap, string, street"},
+    "strap","strip","string","street","stream","stripe","strain",
+    "straw","strong","strum","struck","straight",
+    {s:"spr — spring, spray, sprout"},
+    "spring","sprint","sprain","sprite","spray","sprout","spread","sprinkle","sprung","spree",
+    {s:"scr — scrum, scratch, scream"},
+    "scrum","scrub","scrap","scream","scrape","scratch","script","scroll","scrawl","screw",
+    {s:"spl — splash, split, splendid"},
+    "splash","split","splint","splat","splendid","spleen","splurge","splay"
+  ]
+},
+{
+  num:26, title:"3-Letter Clusters: squ · thr · shr",
+  rule:"More 3-letter consonant clusters.\nEach letter keeps its own sound: squ · thr · shr",
+  accent:"#dc2626", hlColor:"#b91c1c", hl:null,
+  hlFn: w=>{
+    for(const c of ["squ","thr","shr"]) if(w.startsWith(c)) return c;
+    return null;
+  },
+  slides:[
+    {s:"squ — square, squeak, squeeze"},
+    "square","squeak","squeeze","squirt","squash","squid",
+    "squeal","squirrel","squint","squabble",
+    {s:"thr — three, throat, through"},
+    "three","threw","through","throat","thrill","throw","thread",
+    "throne","throb","thrust","thrive","thrash",
+    {s:"shr — shred, shrink, shrimp"},
+    "shred","shrink","shrimp","shrub","shrug","shriek","shrine","shrill","shrew"
+  ]
+},
+{
+  num:27, title:"Contractions 2",
+  rule:"Two words joined to make a shorter word.\nAn apostrophe marks where the letters have been left out.",
+  accent:"#7c3aed", hlColor:"#6d28d9", hl:"'",
+  slides:[
+    {s:"I am / I have / I will / I would"},
+    {w:"I'm",sub:"I am"},{w:"I've",sub:"I have"},{w:"I'll",sub:"I will"},{w:"I'd",sub:"I would"},
+    {s:"you are / you have / you will / you would"},
+    {w:"you're",sub:"you are"},{w:"you've",sub:"you have"},{w:"you'll",sub:"you will"},{w:"you'd",sub:"you would"},
+    {s:"he / she / it"},
+    {w:"he's",sub:"he is"},{w:"he'll",sub:"he will"},{w:"he'd",sub:"he would"},
+    {w:"she's",sub:"she is"},{w:"she'll",sub:"she will"},{w:"she'd",sub:"she would"},
+    {w:"it's",sub:"it is"},
+    {s:"we / they"},
+    {w:"we're",sub:"we are"},{w:"we'll",sub:"we will"},{w:"we'd",sub:"we would"},
+    {w:"they're",sub:"they are"},{w:"they've",sub:"they have"},
+    {w:"they'll",sub:"they will"},{w:"they'd",sub:"they would"},
+    {s:"negative contractions"},
+    {w:"can't",sub:"can not"},{w:"don't",sub:"do not"},{w:"won't",sub:"will not"},
+    {w:"isn't",sub:"is not"},{w:"aren't",sub:"are not"},{w:"wasn't",sub:"was not"},
+    {w:"weren't",sub:"were not"},{w:"didn't",sub:"did not"},{w:"doesn't",sub:"does not"},
+    {w:"couldn't",sub:"could not"},{w:"shouldn't",sub:"should not"},{w:"wouldn't",sub:"would not"},
+    {w:"haven't",sub:"have not"},{w:"hasn't",sub:"has not"},{w:"hadn't",sub:"had not"},
+    {w:"mustn't",sub:"must not"},
+    {s:"common contractions"},
+    {w:"let's",sub:"let us"},{w:"that's",sub:"that is"},{w:"there's",sub:"there is"},
+    {w:"here's",sub:"here is"},{w:"what's",sub:"what is"},{w:"who's",sub:"who is"}
+  ]
+},
+{
+  num:28, title:"R-Controlled: er · ir · ur",
+  rule:"When 'r' follows the vowels e, i, u — the vowel sound changes to /er/.\nThe 'r' controls the vowel sound.",
+  accent:"#b45309", hlColor:"#78350f", hl:null,
+  hlFn: w=>{
+    if(/er/.test(w)) return "er";
+    if(/ir/.test(w)) return "ir";
+    if(/ur/.test(w)) return "ur";
+    return null;
+  },
+  slides:[
+    {s:"'er' — her, fern, term"},
+    "her","term","fern","verb","stern","germ","nerve","serve","perch","clerk",
+    "verse","merge","prefer","infer","expert","alert","concern","desert","insert",
+    {s:"'ir' — bird, girl, shirt"},
+    "bird","girl","shirt","first","birth","third","stir","firm","sir","swirl",
+    "whirl","flirt","squirt","thirst","twirl","chirp","dirty","thirty","birthday","circuit",
+    {s:"'ur' — burn, turn, hurt"},
+    "burn","turn","hurt","burst","fur","curl","surf","nurse","purse","church",
+    "curve","lurk","blur","turkey","purple","turtle","Thursday","during","return","suburb","disturb","urgent"
+  ]
+},
+{
+  num:29, title:"Syllable Division — Trumpet Rule",
+  rule:"Words with the pattern VCCV are divided between the two consonants.\ntrum / pet — this helps us read and spell longer words.",
+  accent:"#0d9488", hlColor:"#0f766e", hl:null,
+  slides:[
+    {s:"VC·CV — divide between the two consonants"},
+    {w:"trumpet",syl:"trum·pet"},{w:"basket",syl:"bas·ket"},{w:"rabbit",syl:"rab·bit"},
+    {w:"mitten",syl:"mit·ten"},{w:"butter",syl:"but·ter"},{w:"dinner",syl:"din·ner"},
+    {w:"letter",syl:"let·ter"},{w:"better",syl:"bet·ter"},{w:"matter",syl:"mat·ter"},
+    {w:"pepper",syl:"pep·per"},{w:"kitten",syl:"kit·ten"},{w:"button",syl:"but·ton"},
+    {w:"cotton",syl:"cot·ton"},{w:"sudden",syl:"sud·den"},{w:"ribbon",syl:"rib·bon"},
+    {w:"lesson",syl:"les·son"},{w:"common",syl:"com·mon"},{w:"tennis",syl:"ten·nis"},
+    {w:"carrot",syl:"car·rot"},{w:"parrot",syl:"par·rot"},{w:"barrel",syl:"bar·rel"},
+    {s:"-y ending words"},
+    {w:"happy",syl:"hap·py"},{w:"penny",syl:"pen·ny"},{w:"funny",syl:"fun·ny"},
+    {w:"sunny",syl:"sun·ny"},{w:"bunny",syl:"bun·ny"},{w:"puppy",syl:"pup·py"},
+    {w:"silly",syl:"sil·ly"},{w:"jelly",syl:"jel·ly"},{w:"holly",syl:"hol·ly"},
+    {s:"-le ending words"},
+    {w:"little",syl:"lit·tle"},{w:"middle",syl:"mid·dle"},{w:"riddle",syl:"rid·dle"},
+    {w:"saddle",syl:"sad·dle"},{w:"bottle",syl:"bot·tle"},{w:"cattle",syl:"cat·tle"},
+    {w:"rattle",syl:"rat·tle"},{w:"battle",syl:"bat·tle"},{w:"puddle",syl:"pud·dle"},
+    {w:"muddle",syl:"mud·dle"},{w:"noodle",syl:"noo·dle"},{w:"poodle",syl:"poo·dle"}
+  ]
+},
+{
+  num:30, title:"Schwa 'er' at End of Word",
+  rule:"The unstressed syllable at the end of a word loses its pure vowel sound.\nIt sounds like a soft, short /u/ — this is called the schwa.",
+  accent:"#db2777", hlColor:"#be185d", hl:null,
+  hlFn: w=>{
+    if(w.endsWith("er")) return "er";
+    if(w.endsWith("or")) return "or";
+    if(w.endsWith("ar")) return "ar";
+    return null;
+  },
+  slides:[
+    {s:"family and people — schwa /er/"},
+    "sister","brother","mother","father","teacher","farmer","dancer","player","doctor","actor",
+    {s:"nature and place words"},
+    "water","river","flower","tower","shower","thunder","winter","summer","corner","center",
+    {s:"action and description words"},
+    "after","under","over","never","ever","other","together","later","wonder","number",
+    {s:"more schwa /er/ words"},
+    "butter","ladder","dinner","winner","paper","silver","finger","power","weather","feather",
+    "leather","gather","whisper","flicker","clever","bitter","litter","copper","pepper","flutter",
+    "glitter","scatter","proper"
+  ]
+},
+{
+  num:31, title:"Prefix un– (not)",
+  rule:"A prefix is a group of letters placed before the base word.\n'un–' means NOT or the OPPOSITE of the base word.",
+  accent:"#4f46e5", hlColor:"#3730a3", hl:"un",
+  slides:[
+    {s:"un– means NOT or opposite"},
+    "undo","unzip","unpack","unwrap","unclear","unkind","unhappy","unsafe",
+    "untie","unlock","unwell","unfit","unable","unlike","uncover","unload",
+    "unfair","uneven","unusual","unknown","untidy","unplug","uncommon","unlucky",
+    "unreal","unravel","unselfish","unwanted","unfinished","unbroken",
+    "unbeaten","uncertain","uncomfortable","unhealthy","unnecessary","unpleasant","unsteady"
+  ]
+},
+{
+  num:32, title:"Suffixes: –ly · –er · –est",
+  rule:"A suffix is placed AFTER the base word and changes its meaning.\n–ly makes an adverb.   –er compares two things.   –est compares three or more.",
+  accent:"#7c3aed", hlColor:"#5b21b6", hl:null,
+  hlFn: w=>{
+    if(w.endsWith("est")) return "est";
+    if(w.endsWith("er"))  return "er";
+    if(w.endsWith("ly"))  return "ly";
+    return null;
+  },
+  slides:[
+    {s:"–ly makes an adverb"},
+    "lovely","loudly","quickly","friendly","sadly","gladly","neatly","suddenly",
+    "softly","finally","nearly","safely","slowly","calmly","brightly","kindly",
+    "gently","badly","firmly","quietly","closely","clearly","swiftly",
+    {s:"–er comparing TWO things"},
+    "bigger","smaller","louder","softer","longer","taller","harder",
+    "slower","faster","brighter","kinder","darker","gentler","stronger","younger","older","closer",
+    {s:"–est comparing THREE or more things"},
+    "biggest","smallest","loudest","softest","longest","tallest","hardest",
+    "slowest","fastest","brightest","kindest","darkest","strongest","youngest","oldest","closest"
+  ]
+},
+{
+  num:33, title:"Trigraph 'tch'",
+  rule:"A trigraph is three letters that spell ONE sound.\n'tch' is used at the end of a one-syllable word, straight after a short vowel.",
+  accent:"#0891b2", hlColor:"#0e7490", hl:"tch",
+  slides:[
+    {s:"short vowel + tch"},
+    "catch","latch","hutch","pitch","hatch","fetch","ditch","stitch","snatch","hatchet",
+    "watch","stretch","witch","match","kitchen","butcher","ketchup","fetching","clutch","notch",
+    "sketch","scratch","switch","twitch","itch","patch","batch","botch","dispatch",
+    "thatch","attach","detach","hopscotch","wristwatch","stopwatch"
+  ]
+}
+];
+
+// ══════════════════════════════════════════════════════
+//  MAIN PAGE
+// ══════════════════════════════════════════════════════
+function buildMain(){
+  const g = document.getElementById("cards");
+  LISTS.forEach((L,i)=>{
+    const d = document.createElement("div");
+    d.className = "card";
+    d.style.setProperty("--c", L.accent);
+    d.innerHTML = `
+      <div class="badge">List ${L.num}</div>
+      <h2>${L.title}</h2>
+      <p style="color:${L.accent};font-weight:700;font-size:.9rem;margin-top:4px;">${countWords(L)} words</p>
+      <span class="arr">→</span>`;
+    d.onclick = ()=> openList(i);
+    g.appendChild(d);
+  });
+}
+
+function countWords(L){
+  return L.slides.filter(s=>typeof s==="string"||s.w).length;
+}
+
+// ══════════════════════════════════════════════════════
+//  SLIDE BUILD
+// ══════════════════════════════════════════════════════
+let curList=null, curIdx=0, slides=[];
+
+function buildSlides(L){
+  const {accent:acc, hlColor, hl, hlFn} = L;
+
+  function getHl(word){
+    if(hlFn) return hlFn(word);
+    return hl||null;
+  }
+
+  function applyHl(text, pattern){
+    if(!pattern) return text;
+    const re = new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"g");
+    return text.replace(re,`<span class="hl" style="color:${hlColor}">${pattern}</span>`);
+  }
+
+  function fs(word){
+    const n = word.replace(/[·]/g,"").length;
+    if(n<=3)  return "clamp(5rem,18vw,11rem)";
+    if(n<=5)  return "clamp(4rem,14vw,9rem)";
+    if(n<=7)  return "clamp(3.2rem,11vw,7.5rem)";
+    if(n<=9)  return "clamp(2.8rem,9vw,6rem)";
+    if(n<=12) return "clamp(2.2rem,7vw,5rem)";
+    return              "clamp(1.8rem,5.5vw,4rem)";
+  }
+
+  const out=[];
+
+  // ── title slide
+  out.push({html:`
+    <div class="slide-wrap">
+      <div class="sl-title">
+        <div class="list-num" style="background:${acc}">List ${L.num}</div>
+        <h2>${L.title}</h2>
+        <p class="rule">${L.rule.replace(/\n/g,"<br>")}</p>
+      </div>
+    </div>`});
+
+  L.slides.forEach(item=>{
+    if(typeof item==="string"){
+      const pattern = getHl(item);
+      const display = applyHl(item, pattern);
+      out.push({word:item, html:`
+        <div class="slide-wrap">
+          <div class="sl-word">
+            <div class="list-tag" style="background:${acc}">List ${L.num} · ${L.title}</div>
+            <p class="the-word" style="font-size:${fs(item)}">${display}</p>
+          </div>
+        </div>`});
+    } else if(item.s){
+      out.push({html:`
+        <div class="slide-wrap">
+          <div class="sl-section">
+            <div class="sec-label" style="color:${acc}">List ${L.num} · ${L.title}</div>
+            <h3 style="color:${acc}">${item.s}</h3>
+          </div>
+        </div>`});
+    } else if(item.w){
+      const word = item.w;
+      const display_raw = item.syl || word;
+      const pattern = getHl(word);
+      const display = applyHl(display_raw, pattern);
+      const subHtml = item.sub
+        ? `<div class="sub-text">${item.sub}</div>`
+        : item.syl
+        ? `<div class="sub-text" style="color:${acc};font-weight:600;font-size:clamp(1rem,2vw,1.4rem);">trum · pet  (syllable split)</div>`
+        : "";
+      const partsHtml = item.p
+        ? `<div class="parts"><span class="p1" style="color:${acc}">${item.p[0]}</span>&nbsp;+&nbsp;<span class="p2" style="color:${hlColor}">${item.p[1]}</span></div>`
+        : "";
+      out.push({word, html:`
+        <div class="slide-wrap">
+          <div class="sl-word">
+            <div class="list-tag" style="background:${acc}">List ${L.num} · ${L.title}</div>
+            <p class="the-word" style="font-size:${fs(word)}">${display}</p>
+            ${subHtml}${partsHtml}
+          </div>
+        </div>`});
+    }
+  });
+
+  return out;
+}
+
+// ══════════════════════════════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════════════════════════════
+function openList(idx){
+  curList = LISTS[idx];
+  curIdx  = 0;
+  slides  = buildSlides(curList);
+
+  document.getElementById("sv-title").textContent = `List ${curList.num} · ${curList.title}`;
+
+  // dots
+  const dotsEl = document.getElementById("dots");
+  dotsEl.innerHTML = slides.map((_,i)=>`<div class="dot" onclick="goTo(${i})"></div>`).join("");
+
+  render();
+
+  document.getElementById("main").style.display = "none";
+  document.getElementById("sv").style.display   = "flex";
+}
+
+function render(){
+  document.getElementById("stage").innerHTML = slides[curIdx].html;
+  document.getElementById("sv-count").textContent = `${curIdx+1} / ${slides.length}`;
+  document.querySelectorAll(".dot").forEach((d,i)=>{
+    d.classList.toggle("on", i===curIdx);
+    d.style.background = i===curIdx ? curList.accent : "#e5e7eb";
+  });
+  document.getElementById("bprev").disabled = curIdx===0;
+  document.getElementById("bnext").disabled = curIdx===slides.length-1;
+  // color nav buttons
+  const nb = document.querySelectorAll(".btn-nav:not(:disabled)");
+  nb.forEach(b=>{ b.style.borderColor=curList.accent; b.style.color=curList.accent; });
+}
+
+function go(dir){
+  const n=curIdx+dir;
+  if(n<0||n>=slides.length) return;
+  curIdx=n; render();
+}
+function goTo(i){ curIdx=i; render(); }
+
+function closeSlides(){
+  document.getElementById("sv").style.display   = "none";
+  document.getElementById("main").style.display = "flex";
+}
+
+document.addEventListener("keydown",e=>{
+  if(document.getElementById("sv").style.display==="flex"){
+    if(e.key==="ArrowRight"||e.key==="ArrowDown") go(1);
+    if(e.key==="ArrowLeft" ||e.key==="ArrowUp")   go(-1);
+    if(e.key==="Escape") closeSlides();
+  }
+});
+
+buildMain();
+</script>
+</body>
+</html>
