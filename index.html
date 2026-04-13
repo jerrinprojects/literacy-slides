@@ -201,8 +201,20 @@ body{background:#f4f0fc;}
 
 const LISTS = [
 {
+  num:0, badge:"Heart Words",
+  title:"Year 3 High-Frequency Words",
+  rule:"Heart words are common words that appear often in reading and writing.\nLearn to read and spell these words by heart.",
+  accent:"#db2777", hlColor:"#be185d", hl:null,
+  slides:[
+    "any","also","ask","ever","many","only",
+    "none","their","bought","really","while",
+    "never","above","more","once",
+    "no","find","last"
+  ]
+},
+{
   num:18, title:"R-Controlled Syllable",
-  rule:"When 'r' follows a vowel, the 'r' controls the vowel sound.\n'ar' sounds like /ar/ as in 'car'. 'or' sounds like /or/ as in 'for'.",
+  rule:"When 'r' follows a vowel, the 'r' controls the vowel sound.\n'ar' as in 'car'. 'or' as in 'for'.",
   accent:"#b45309", hlColor:"#92400e", hl:null,
   hlFn: w=>{
     if(/ar/.test(w)) return "ar";
@@ -211,29 +223,31 @@ const LISTS = [
   },
   slides:[
     {s:"'ar' words"},
-    "car","far","star","bar","jar","cart","farm","arm","art","bark",
-    "dark","hard","park","part","start","yard","card","sharp","scar","mark",
+    "harm","dark","car","start","arm","jar","bar","cart",
+    "hard","sharp","spark","garden","smart",
+    "chart","march","artist","arch","scar","yard","farm",
     {s:"'or' words"},
-    "for","corn","born","horn","more","store","core","shore","sport","short",
-    "sort","port","fort","north","fork","force","horse","order","storm","morning"
+    "for","corn","born","fort","popcorn","storm",
+    "forgot","north","core","pork","torch","horse",
+    "morning","sport","more","shore","order"
   ]
 },
 {
-  num:19, title:"'y' represents long /i/ or long /a/",
-  rule:"The letter 'y' can act as a vowel.\n'y' at the end of a short word makes the long /i/ sound.\n'ay' makes the long /a/ sound.",
+  num:19, title:"'y' as a Vowel",
+  rule:"The letter 'y' acts as a vowel in two ways.\n'y' at the end of a short word = long /i/ sound (fly, sky).\n'y' at the end of a longer word = long /e/ sound (happy, funny).",
   accent:"#7c3aed", hlColor:"#6d28d9", hl:null,
   hlFn: w=>{
-    if(w.includes("ay")) return "ay";
     if(w.endsWith("y")) return "y";
     return null;
   },
   slides:[
-    {s:"'y' makes long /i/ sound"},
-    "fly","sky","cry","dry","fry","try","by","my","spy","sly",
-    "rely","deny","supply","apply","multiply","July",
-    {s:"'ay' makes long /a/ sound"},
-    "day","say","play","stay","way","pay","ray","may","clay","spray",
-    "stray","delay","relay","display","birthday","runway","away","today","maybe","always"
+    {s:"'y' as long /i/ — short words"},
+    "cry","shy","sky","dry","fry","my","fly","try","by","sly","spy","July","deny","rely","supply",
+    {s:"'y' as long /e/ — longer words"},
+    "happy","funny","silly","cheeky","puppy","tidy",
+    "family","empty","party","sorry",
+    "nobody","merry","windy","dusty","lucky",
+    "bossy","muddy","stormy","army","baby"
   ]
 },
 {
@@ -366,22 +380,22 @@ const LISTS = [
   ]
 },
 {
-  num:26, title:"3-Letter Clusters: squ · thr · shr",
-  rule:"More 3-letter consonant clusters.\nEach letter keeps its own sound: squ · thr · shr",
+  num:26, title:"Vowel Teams 'ai' and 'oy'",
+  rule:"The vowel team 'ai' makes the long /a/ sound as in 'sail'.\nThe vowel team 'oy' makes the /oi/ sound as in 'boy'.",
   accent:"#dc2626", hlColor:"#b91c1c", hl:null,
   hlFn: w=>{
-    for(const c of ["squ","thr","shr"]) if(w.startsWith(c)) return c;
+    if(w.includes("ai")) return "ai";
+    if(w.includes("oy")) return "oy";
     return null;
   },
   slides:[
-    {s:"squ — square, squeak, squeeze"},
-    "square","squeak","squeeze","squirt","squash","squid",
-    "squeal","squirrel","squint","squabble",
-    {s:"thr — three, throat, through"},
-    "three","threw","through","throat","thrill","throw","thread",
-    "throne","throb","thrust","thrive","thrash",
-    {s:"shr — shred, shrink, shrimp"},
-    "shred","shrink","shrimp","shrub","shrug","shriek","shrine","shrill","shrew"
+    {s:"'ai' — sail, rain, paint"},
+    "sail","tail","rain","wait","paint","aim","brain","train","chain","strain",
+    "main","plain","braid","snail","trail","nail","rail","pail","paid","maid",
+    "afraid","explain","remain","contain","sailing","painted","trainer",
+    {s:"'oy' — boy, joy, enjoy"},
+    "boy","joy","toy","Roy","destroy","enjoy","employ","annoy",
+    "royal","loyal","oyster","decoy","cowboy","ploy","soy","joyful"
   ]
 },
 {
@@ -542,7 +556,7 @@ function buildMain(){
     d.className = "card";
     d.style.setProperty("--c", L.accent);
     d.innerHTML = `
-      <div class="badge">List ${L.num}</div>
+      <div class="badge">${L.badge || 'List ' + L.num}</div>
       <h2>${L.title}</h2>
       <p style="color:${L.accent};font-weight:700;font-size:.9rem;margin-top:4px;">${countWords(L)} words</p>
       <span class="arr">→</span>`;
@@ -590,7 +604,7 @@ function buildSlides(L){
   out.push({html:`
     <div class="slide-wrap">
       <div class="sl-title">
-        <div class="list-num" style="background:${acc}">List ${L.num}</div>
+        <div class="list-num" style="background:${acc}">${L.badge || 'List ' + L.num}</div>
         <h2>${L.title}</h2>
         <p class="rule">${L.rule.replace(/\n/g,"<br>")}</p>
       </div>
@@ -603,7 +617,7 @@ function buildSlides(L){
       out.push({word:item, html:`
         <div class="slide-wrap">
           <div class="sl-word">
-            <div class="list-tag" style="background:${acc}">List ${L.num} · ${L.title}</div>
+            <div class="list-tag" style="background:${acc}">${L.badge || 'List ' + L.num + ' · ' + L.title}</div>
             <p class="the-word" style="font-size:${fs(item)}">${display}</p>
           </div>
         </div>`});
@@ -611,7 +625,7 @@ function buildSlides(L){
       out.push({html:`
         <div class="slide-wrap">
           <div class="sl-section">
-            <div class="sec-label" style="color:${acc}">List ${L.num} · ${L.title}</div>
+            <div class="sec-label" style="color:${acc}">${L.badge || 'List ' + L.num + ' · ' + L.title}</div>
             <h3 style="color:${acc}">${item.s}</h3>
           </div>
         </div>`});
@@ -631,7 +645,7 @@ function buildSlides(L){
       out.push({word, html:`
         <div class="slide-wrap">
           <div class="sl-word">
-            <div class="list-tag" style="background:${acc}">List ${L.num} · ${L.title}</div>
+            <div class="list-tag" style="background:${acc}">${L.badge || 'List ' + L.num + ' · ' + L.title}</div>
             <p class="the-word" style="font-size:${fs(word)}">${display}</p>
             ${subHtml}${partsHtml}
           </div>
@@ -650,7 +664,7 @@ function openList(idx){
   curIdx  = 0;
   slides  = buildSlides(curList);
 
-  document.getElementById("sv-title").textContent = `List ${curList.num} · ${curList.title}`;
+  document.getElementById("sv-title").textContent = curList.badge ? `${curList.badge} · ${curList.title}` : `List ${curList.num} · ${curList.title}`;
 
   // dots
   const dotsEl = document.getElementById("dots");
