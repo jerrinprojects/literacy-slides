@@ -54,11 +54,50 @@ body{background:#f4f0fc;}
   transition:background .15s;
 }
 .btn-back:hover{background:#e5e7eb;}
+.btn-sidebar{
+  background:#f3f4f6;color:#374151;border:none;border-radius:10px;
+  padding:9px 13px;font-size:1.1rem;cursor:pointer;font-weight:700;
+  transition:background .15s;flex-shrink:0;
+}
+.btn-sidebar:hover{background:#e5e7eb;}
 .topbar-title{
   flex:1;text-align:center;color:#374151;font-size:1rem;font-weight:700;
   letter-spacing:.02em;
 }
 .topbar-count{color:#9ca3af;font-size:.9rem;min-width:64px;text-align:right;font-weight:600;}
+
+/* body = sidebar + main */
+#sv-body{flex:1;display:flex;overflow:hidden;}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:0;flex-shrink:0;overflow:hidden;
+  background:#f9fafb;border-right:2px solid #e5e7eb;
+  transition:width .25s ease;
+  display:flex;flex-direction:column;
+}
+.sidebar.open{width:240px;}
+.sb-list{overflow-y:auto;flex:1;}
+.sb-item{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 14px;cursor:pointer;
+  border-bottom:1px solid #f0f0f0;
+  transition:background .12s;
+  font-size:.84rem;color:#374151;line-height:1.3;
+  white-space:nowrap;overflow:hidden;
+}
+.sb-item:hover{background:#f0f0f0;}
+.sb-item.on{background:var(--sb-accent-bg,#ede9fe);color:var(--sb-accent-fg,#5b21b6);font-weight:700;}
+.sb-num{
+  min-width:26px;height:26px;border-radius:50%;
+  background:#e5e7eb;display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;flex-shrink:0;
+}
+.sb-item.on .sb-num{background:var(--sb-accent,#7c3aed);color:#fff;}
+.sb-label{overflow:hidden;text-overflow:ellipsis;}
+
+/* sv-main = stage + nav */
+#sv-main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
 
 /* stage — fills all remaining height */
 .stage{
@@ -176,15 +215,23 @@ body{background:#f4f0fc;}
 <!-- SLIDE VIEW -->
 <div id="sv">
   <div class="topbar">
+    <button class="btn-sidebar" onclick="toggleSidebar()" title="Slides panel">☰</button>
     <button class="btn-back" onclick="closeSlides()">← Back</button>
     <div class="topbar-title" id="sv-title"></div>
     <div class="topbar-count" id="sv-count"></div>
   </div>
-  <div class="stage" id="stage"></div>
-  <div class="nav">
-    <button class="btn-nav" id="bprev" onclick="go(-1)">Prev</button>
-    <div class="dots" id="dots"></div>
-    <button class="btn-nav" id="bnext" onclick="go(1)">Next</button>
+  <div id="sv-body">
+    <div class="sidebar" id="sidebar">
+      <div class="sb-list" id="sb-list"></div>
+    </div>
+    <div id="sv-main">
+      <div class="stage" id="stage"></div>
+      <div class="nav">
+        <button class="btn-nav" id="bprev" onclick="go(-1)">Prev</button>
+        <div class="dots" id="dots"></div>
+        <button class="btn-nav" id="bnext" onclick="go(1)">Next</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -657,6 +704,47 @@ function buildSlides(L){
 }
 
 // ══════════════════════════════════════════════════════
+//  SIDEBAR
+// ══════════════════════════════════════════════════════
+function toggleSidebar(){
+  document.getElementById("sidebar").classList.toggle("open");
+}
+
+function buildSidebar(){
+  const sb   = document.getElementById("sidebar");
+  const list = document.getElementById("sb-list");
+  // set accent colours as CSS vars
+  sb.style.setProperty("--sb-accent", curList.accent);
+  // light tint for active bg
+  sb.style.setProperty("--sb-accent-bg", curList.accent + "22");
+  sb.style.setProperty("--sb-accent-fg", curList.accent);
+
+  list.innerHTML = slides.map((s,i)=>{
+    let label;
+    if(i===0) label = "Title";
+    else if(s.word) label = s.word;
+    else{
+      // section slide — extract h3 text
+      const m = s.html.match(/<h3[^>]*>([\s\S]*?)<\/h3>/);
+      label = m ? m[1].replace(/<[^>]+>/g,"").trim() : "—";
+    }
+    return `<div class="sb-item${i===curIdx?" on":""}" onclick="goTo(${i})">
+      <div class="sb-num">${i+1}</div>
+      <div class="sb-label">${label}</div>
+    </div>`;
+  }).join("");
+}
+
+function updateSidebar(){
+  document.querySelectorAll(".sb-item").forEach((el,i)=>{
+    el.classList.toggle("on", i===curIdx);
+  });
+  // scroll active item into view
+  const active = document.querySelector(".sb-item.on");
+  if(active) active.scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+
+// ══════════════════════════════════════════════════════
 //  NAVIGATION
 // ══════════════════════════════════════════════════════
 function openList(idx){
@@ -670,6 +758,7 @@ function openList(idx){
   const dotsEl = document.getElementById("dots");
   dotsEl.innerHTML = slides.map((_,i)=>`<div class="dot" onclick="goTo(${i})"></div>`).join("");
 
+  buildSidebar();
   render();
 
   document.getElementById("main").style.display = "none";
@@ -688,6 +777,7 @@ function render(){
   // color nav buttons
   const nb = document.querySelectorAll(".btn-nav:not(:disabled)");
   nb.forEach(b=>{ b.style.borderColor=curList.accent; b.style.color=curList.accent; });
+  updateSidebar();
 }
 
 function go(dir){
@@ -698,6 +788,7 @@ function go(dir){
 function goTo(i){ curIdx=i; render(); }
 
 function closeSlides(){
+  document.getElementById("sidebar").classList.remove("open");
   document.getElementById("sv").style.display   = "none";
   document.getElementById("main").style.display = "flex";
 }
