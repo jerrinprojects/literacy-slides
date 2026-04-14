@@ -753,9 +753,6 @@ function openList(idx){
 
   document.getElementById("sv-title").textContent = curList.badge ? `${curList.badge} · ${curList.title}` : `List ${curList.num} · ${curList.title}`;
 
-  // dots
-  const dotsEl = document.getElementById("dots");
-  dotsEl.innerHTML = slides.map((_,i)=>`<div class="dot" onclick="goTo(${i})"></div>`).join("");
 
   buildSidebar();
   render();
@@ -767,10 +764,6 @@ function openList(idx){
 function render(){
   document.getElementById("stage").innerHTML = slides[curIdx].html;
   document.getElementById("sv-count").textContent = `${curIdx+1} / ${slides.length}`;
-  document.querySelectorAll(".dot").forEach((d,i)=>{
-    d.classList.toggle("on", i===curIdx);
-    d.style.background = i===curIdx ? curList.accent : "#e5e7eb";
-  });
   document.getElementById("bprev").disabled = curIdx===0;
   document.getElementById("bnext").disabled = curIdx===slides.length-1;
   // color nav buttons
