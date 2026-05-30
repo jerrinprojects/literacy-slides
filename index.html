@@ -95,7 +95,6 @@ body{background:#f4f0fc;}
 }
 .sb-item.on .sb-num{background:var(--sb-accent,#7c3aed);color:#fff;}
 .sb-label{overflow:hidden;text-overflow:ellipsis;}
-.sb-item.sb-sentence .sb-label{font-style:italic;color:#6b7280;}
 
 /* sv-main = stage + nav */
 #sv-main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
@@ -189,38 +188,14 @@ body{background:#f4f0fc;}
 }
 .btn-nav:hover:not(:disabled){background:#e5e7eb;border-color:#d1d5db;}
 .btn-nav:disabled{opacity:.3;cursor:default;}
-/* ── SENTENCE SLIDE ── */
-.sl-sentence{
-  background:#fff;width:100%;max-width:820px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+.dots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;max-width:280px;}
+.dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#e5e7eb;cursor:pointer;flex-shrink:0;
+  transition:background .18s,transform .18s;
 }
-.sl-sentence .list-tag{
-  font-size:1rem;font-weight:700;color:#fff;
-  padding:5px 18px;border-radius:20px;margin-bottom:20px;letter-spacing:.05em;
-}
-.sl-sentence .sent-label{
-  font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:#9ca3af;margin-bottom:12px;
-}
-.sl-sentence .the-sentence{
-  font-size:clamp(1.4rem,3.2vw,2.2rem);font-weight:700;
-  color:#111827;line-height:1.55;max-width:700px;
-}
+.dot.on{transform:scale(1.4);}
 
-/* ── SIDEBAR MOBILE BACKDROP ── */
-#sb-backdrop{
-  display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:30;
-}
-#sb-backdrop.visible{display:block;}
-
-@media(max-width:700px){
-  /* Sidebar becomes a fixed overlay on mobile */
-  .sidebar{
-    position:fixed;top:0;left:0;bottom:0;z-index:40;
-    width:0;
-  }
-  .sidebar.open{width:280px;}
-}
 @media(max-width:540px){
   .slide-wrap{padding:20px 16px;}
   .btn-nav{padding:10px 18px;font-size:.95rem;min-width:80px;}
@@ -236,9 +211,6 @@ body{background:#f4f0fc;}
   <p class="sub">Year 3 · Lists 18 – 33</p>
   <div class="grid" id="cards"></div>
 </div>
-
-<!-- Mobile sidebar backdrop -->
-<div id="sb-backdrop" onclick="closeSidebarMobile()"></div>
 
 <!-- SLIDE VIEW -->
 <div id="sv">
@@ -280,15 +252,10 @@ const LISTS = [
   rule:"Heart words are common words that appear often in reading and writing.\nLearn to read and spell these words by heart.",
   accent:"#db2777", hlColor:"#be185d", hl:null,
   slides:[
-    "any","also","ask","ever","many","very",
-    "any","help","their","through","bought","really",
-    "hour","gone","never","always","house","eyes",
-    "more","once","our","fast","last"
-  ],
-  sentences:[
-    "She also asked for help many times.",
-    "Their eyes went through the house very fast.",
-    "We always go once more — never last."
+    "any","also","ask","ever","many","only",
+    "none","their","bought","really","while",
+    "never","above","more","once",
+    "no","find","last"
   ]
 },
 {
@@ -309,11 +276,6 @@ const LISTS = [
     "for","corn","born","fort","popcorn","storm",
     "forgot","north","core","pork","torch","horse",
     "morning","sport","more","shore","order"
-  ],
-  sentences:[
-    "In the morning we drove to the farm.",
-    "The horse ran north to the shore.",
-    "A sharp spark lit the dark arch."
   ]
 },
 {
@@ -332,11 +294,6 @@ const LISTS = [
     "family","empty","party","sorry",
     "nobody","merry","windy","dusty","lucky",
     "bossy","muddy","stormy","army","baby"
-  ],
-  sentences:[
-    "A funny puppy tried to fly a kite.",
-    "The shy baby cried at the party.",
-    "A silly puppy ran across the dry grass."
   ]
 },
 {
@@ -357,11 +314,6 @@ const LISTS = [
     "see","tree","free","bee","feed","seed","need","feet","meet","street",
     "green","keep","sleep","sheep","deep","feel","heel","week","seek","three",
     "agree","teeth","steel","wheel","sweet"
-  ],
-  sentences:[
-    "We ate a sweet meal by the sea.",
-    "The team sat under the big green tree.",
-    "She loves to read and eat sweet treats."
   ]
 },
 {
@@ -381,11 +333,6 @@ const LISTS = [
     {s:"'ow' makes long /o/ sound"},
     "show","blow","flow","grow","know","low","slow","snow","throw","crow",
     "glow","below","elbow","follow","shadow","window","yellow","hollow","rainbow","meadow"
-  ],
-  sentences:[
-    "The yellow boat floated below the bridge.",
-    "A crow sat by the window and watched.",
-    "A slow wind began to blow."
   ]
 },
 {
@@ -415,11 +362,6 @@ const LISTS = [
     {w:"hair",sub:"on your head"},{w:"hare",sub:"animal like a rabbit"},
     {w:"bear",sub:"an animal"},{w:"bare",sub:"empty / uncovered"},
     {w:"flower",sub:"grows in garden"},{w:"flour",sub:"used for baking"}
-  ],
-  sentences:[
-    "Mum went to buy flour for baking.",
-    "Do you know where they left their bags?",
-    "I can hear the rain from here."
   ]
 },
 {
@@ -435,11 +377,6 @@ const LISTS = [
     "food","moon","roof","room","shoot","boom","soon","zoom",
     "gloom","too","spoon","root","balloon","igloo","kangaroo",
     "bloom","broom","pool","fool","stool","drool","spool","tooth","smooth"
-  ],
-  sentences:[
-    "I read a good book in my room.",
-    "She stood on the stool to look up.",
-    "After school we swam in the cool pool."
   ]
 },
 {
@@ -466,11 +403,6 @@ const LISTS = [
     {w:"waterfall",p:["water","fall"]},{w:"butterfly",p:["butter","fly"]},
     {w:"playground",p:["play","ground"]},{w:"sunflower",p:["sun","flower"]},
     {w:"daydream",p:["day","dream"]},{w:"seashell",p:["sea","shell"]}
-  ],
-  sentences:[
-    "We played football on the playground.",
-    "On my birthday I saw a rainbow.",
-    "A butterfly flew past the waterfall."
   ]
 },
 {
@@ -491,35 +423,25 @@ const LISTS = [
     "scrum","scrub","scrap","scream","scrape","scratch","script","scroll","scrawl","screw",
     {s:"spl — splash, split, splendid"},
     "splash","split","splint","splat","splendid","spleen","splurge","splay"
-  ],
-  sentences:[
-    "We ran straight past the stream.",
-    "She made a big splash in the puddle.",
-    "He tried to stretch and reach the top."
   ]
 },
 {
-  num:26, title:"Vowel Teams 'ai' and 'oy'",
-  rule:"The vowel team 'ai' makes the long /a/ sound as in 'sail'.\nThe vowel team 'oy' makes the /oi/ sound as in 'boy'.",
+  num:26, title:"Vowel Teams 'oi' and 'oy'",
+  rule:"The vowel team 'oi' makes the /oi/ sound in the middle of a word, as in 'coin'.\nThe vowel team 'oy' makes the same /oi/ sound at the end of a word, as in 'boy'.",
   accent:"#dc2626", hlColor:"#b91c1c", hl:null,
   hlFn: w=>{
-    if(w.includes("ai")) return "ai";
+    if(w.includes("oi")) return "oi";
     if(w.includes("oy")) return "oy";
     return null;
   },
   slides:[
-    {s:"'ai' — sail, rain, paint"},
-    "sail","tail","rain","wait","paint","aim","brain","train","chain","strain",
-    "main","plain","braid","snail","trail","nail","rail","pail","paid","maid",
-    "afraid","explain","remain","contain","sailing","painted","trainer",
+    {s:"'oi' — coin, boil, point"},
+    "oil","boil","coin","join","point","soil","foil","toil","coil","joint",
+    "moist","hoist","broil","spoil","avoid","poison","noise","voice","choice",
+    "boiling","joining","pointed","spoiled","poisoned","appoint","rejoin",
     {s:"'oy' — boy, joy, enjoy"},
     "boy","joy","toy","Roy","destroy","enjoy","employ","annoy",
     "royal","loyal","oyster","decoy","cowboy","ploy","soy","joyful"
-  ],
-  sentences:[
-    "The boy sailed his toy boat in the rain.",
-    "A loyal cowboy rode along the trail.",
-    "She painted a snail on the plain wall."
   ]
 },
 {
@@ -549,11 +471,6 @@ const LISTS = [
     {s:"common contractions"},
     {w:"let's",sub:"let us"},{w:"that's",sub:"that is"},{w:"there's",sub:"there is"},
     {w:"here's",sub:"here is"},{w:"what's",sub:"what is"},{w:"who's",sub:"who is"}
-  ],
-  sentences:[
-    "I'm sure you'll love this book.",
-    "She's going to the park after school.",
-    "Don't forget — we're meeting at the library."
   ]
 },
 {
@@ -576,11 +493,6 @@ const LISTS = [
     {s:"'ur' — burn, turn, hurt"},
     "burn","turn","hurt","burst","fur","curl","surf","nurse","purse","church",
     "curve","lurk","blur","turkey","purple","turtle","Thursday","during","return","suburb","disturb","urgent"
-  ],
-  sentences:[
-    "The girl in the purple shirt ran first.",
-    "The nurse said the burn would not hurt.",
-    "A turtle hid in the ferns by the river."
   ]
 },
 {
@@ -605,11 +517,6 @@ const LISTS = [
     {w:"saddle",syl:"sad·dle"},{w:"bottle",syl:"bot·tle"},{w:"cattle",syl:"cat·tle"},
     {w:"rattle",syl:"rat·tle"},{w:"battle",syl:"bat·tle"},{w:"puddle",syl:"pud·dle"},
     {w:"muddle",syl:"mud·dle"},{w:"noodle",syl:"noo·dle"},{w:"poodle",syl:"poo·dle"}
-  ],
-  sentences:[
-    "The puppy sat in the middle of the mat.",
-    "A little rabbit nibbled butter on the table.",
-    "She put the bottle on the little table."
   ]
 },
 {
@@ -633,11 +540,6 @@ const LISTS = [
     "butter","ladder","dinner","winner","paper","silver","finger","power","weather","feather",
     "leather","gather","whisper","flicker","clever","bitter","litter","copper","pepper","flutter",
     "glitter","scatter","proper"
-  ],
-  sentences:[
-    "My mother sat by the river in winter.",
-    "The teacher found a flower in the corner.",
-    "Thunder rolled over the water."
   ]
 },
 {
@@ -651,11 +553,6 @@ const LISTS = [
     "unfair","uneven","unusual","unknown","untidy","unplug","uncommon","unlucky",
     "unreal","unravel","unselfish","unwanted","unfinished","unbroken",
     "unbeaten","uncertain","uncomfortable","unhealthy","unnecessary","unpleasant","unsteady"
-  ],
-  sentences:[
-    "It is unkind to leave someone out.",
-    "She was unhappy and had to unpack again.",
-    "He had to unlock the gate and go in."
   ]
 },
 {
@@ -679,11 +576,6 @@ const LISTS = [
     {s:"–est comparing THREE or more things"},
     "biggest","smallest","loudest","softest","longest","tallest","hardest",
     "slowest","fastest","brightest","kindest","darkest","strongest","youngest","oldest","closest"
-  ],
-  sentences:[
-    "She quietly walked to the kindest seat.",
-    "The biggest dog ran the fastest.",
-    "He was the youngest but the strongest."
   ]
 },
 {
@@ -696,11 +588,6 @@ const LISTS = [
     "watch","stretch","witch","match","kitchen","butcher","ketchup","fetching","clutch","notch",
     "sketch","scratch","switch","twitch","itch","patch","batch","botch","dispatch",
     "thatch","attach","detach","hopscotch","wristwatch","stopwatch"
-  ],
-  sentences:[
-    "She went to fetch the ketchup.",
-    "He tried to catch the ball.",
-    "We watched the big match at school."
   ]
 }
 ];
@@ -812,20 +699,6 @@ function buildSlides(L){
     }
   });
 
-  // ── sentence slides
-  if(L.sentences){
-    L.sentences.forEach((sent,i)=>{
-      out.push({sentence:true, label:`Sentence ${i+1}`, html:`
-        <div class="slide-wrap">
-          <div class="sl-sentence">
-            <div class="list-tag" style="background:${acc}">${L.badge || 'List ' + L.num + ' · ' + L.title}</div>
-            <div class="sent-label">Sentence ${i+1} of ${L.sentences.length}</div>
-            <p class="the-sentence">${sent}</p>
-          </div>
-        </div>`});
-    });
-  }
-
   return out;
 }
 
@@ -834,15 +707,6 @@ function buildSlides(L){
 // ══════════════════════════════════════════════════════
 function toggleSidebar(){
   document.getElementById("sidebar").classList.toggle("open");
-  if(window.innerWidth<=700){
-    const isOpen = document.getElementById("sidebar").classList.contains("open");
-    document.getElementById("sb-backdrop").classList.toggle("visible", isOpen);
-  }
-}
-
-function closeSidebarMobile(){
-  document.getElementById("sidebar").classList.remove("open");
-  document.getElementById("sb-backdrop").classList.remove("visible");
 }
 
 function buildSidebar(){
@@ -857,15 +721,13 @@ function buildSidebar(){
   list.innerHTML = slides.map((s,i)=>{
     let label;
     if(i===0) label = "Title";
-    else if(s.sentence) label = s.label;
     else if(s.word) label = s.word;
     else{
       // section slide — extract h3 text
       const m = s.html.match(/<h3[^>]*>([\s\S]*?)<\/h3>/);
       label = m ? m[1].replace(/<[^>]+>/g,"").trim() : "—";
     }
-    const sentCls = s.sentence ? " sb-sentence" : "";
-    return `<div class="sb-item${i===curIdx?" on":""}${sentCls}" onclick="goTo(${i})">
+    return `<div class="sb-item${i===curIdx?" on":""}" onclick="goTo(${i})">
       <div class="sb-num">${i+1}</div>
       <div class="sb-label">${label}</div>
     </div>`;
@@ -897,13 +759,6 @@ function openList(idx){
 
   document.getElementById("main").style.display = "none";
   document.getElementById("sv").style.display   = "flex";
-  // desktop: open sidebar by default; mobile: start closed
-  if(window.innerWidth > 700){
-    document.getElementById("sidebar").classList.add("open");
-  } else {
-    document.getElementById("sidebar").classList.remove("open");
-    document.getElementById("sb-backdrop").classList.remove("visible");
-  }
 }
 
 function render(){
