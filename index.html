@@ -39,6 +39,14 @@ body{background:#f4f0fc;}
 .card p{font-size:.85rem;color:#888;line-height:1.4;}
 .card .arr{font-size:1.6rem;margin-top:12px;display:block;transition:transform .18s;color:var(--c);}
 .card:hover .arr{transform:translateX(6px);}
+.card .ws-link{
+  display:inline-block;margin-top:10px;padding:6px 14px;
+  background:var(--c);color:#fff;text-decoration:none;
+  font-size:.78rem;font-weight:700;border-radius:14px;
+  letter-spacing:.04em;
+  transition:opacity .15s;
+}
+.card .ws-link:hover{opacity:.85;}
 
 /* ── SLIDE VIEW ── */
 #sv{display:none;position:fixed;inset:0;background:#fff;flex-direction:column;}
@@ -526,6 +534,7 @@ const LISTS = [
   num:27, title:"Contractions 2",
   rule:"Two words joined to make a shorter word.\nAn apostrophe marks where the letters have been left out.",
   accent:"#7c3aed", hlColor:"#6d28d9", hl:"'",
+  worksheet:"worksheets/worksheet-list-27.html",
   slides:[
     {s:"I am / I have / I will / I would"},
     {w:"I'm",sub:"I am"},{w:"I've",sub:"I have"},{w:"I'll",sub:"I will"},{w:"I'd",sub:"I would"},
@@ -662,6 +671,7 @@ const LISTS = [
   num:32, title:"Suffixes: –ly · –er · –est",
   rule:"A suffix is placed AFTER the base word and changes its meaning.\n–ly makes an adverb.   –er compares two things.   –est compares three or more.",
   accent:"#7c3aed", hlColor:"#5b21b6", hl:null,
+  worksheet:"worksheets/worksheet-list-32.html",
   hlFn: w=>{
     if(w.endsWith("est")) return "est";
     if(w.endsWith("er"))  return "er";
@@ -718,7 +728,8 @@ function buildMain(){
       <div class="badge">${L.badge || 'List ' + L.num}</div>
       <h2>${L.title}</h2>
       <p style="color:${L.accent};font-weight:700;font-size:.9rem;margin-top:4px;">${countWords(L)} words</p>
-      <span class="arr">→</span>`;
+      <span class="arr">→</span>
+      ${L.worksheet ? `<a class="ws-link" href="${L.worksheet}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="--c:${L.accent}">Worksheet</a>` : ''}`;
     d.onclick = ()=> openList(i);
     g.appendChild(d);
   });
