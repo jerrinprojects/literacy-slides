@@ -39,14 +39,6 @@ body{background:#f4f0fc;}
 .card p{font-size:.85rem;color:#888;line-height:1.4;}
 .card .arr{font-size:1.6rem;margin-top:12px;display:block;transition:transform .18s;color:var(--c);}
 .card:hover .arr{transform:translateX(6px);}
-.card .ws-link{
-  display:inline-block;margin-top:10px;padding:6px 14px;
-  background:var(--c);color:#fff;text-decoration:none;
-  font-size:.78rem;font-weight:700;border-radius:14px;
-  letter-spacing:.04em;
-  transition:opacity .15s;
-}
-.card .ws-link:hover{opacity:.85;}
 
 /* ── SLIDE VIEW ── */
 #sv{display:none;position:fixed;inset:0;background:#fff;flex-direction:column;}
@@ -234,6 +226,108 @@ body{background:#f4f0fc;}
   .btn-nav{padding:10px 18px;font-size:.95rem;min-width:80px;}
   .topbar-title{font-size:.85rem;}
 }
+
+/* ── CARD WITH TWO BUTTONS ── */
+.card-btns{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+.card-btn{
+  display:block;width:100%;text-align:center;padding:9px 16px;border-radius:12px;
+  font-size:.9rem;font-weight:700;cursor:pointer;transition:all .15s;
+  border:2px solid var(--c);color:var(--c);background:#fff;
+  text-decoration:none;
+}
+.card-btn:hover{background:var(--c);color:#fff;}
+.card-btn-act{background:var(--c);color:#fff;}
+.card-btn-act:hover{opacity:.85;}
+
+/* ── ACTIVITY PAGE ── */
+#act{display:none;position:fixed;inset:0;background:#f0fdf4;overflow-y:auto;}
+.act-topbar{
+  position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;padding:14px 22px;gap:14px;
+  border-bottom:2px solid #bbf7d0;background:#fff;flex-shrink:0;
+}
+.act-content{max-width:820px;margin:0 auto;padding:32px 24px 60px;}
+.act-page{margin-bottom:56px;}
+.act-page h2{
+  font-size:1rem;font-weight:800;color:#15803d;
+  border-bottom:3px solid #86efac;padding-bottom:7px;margin-bottom:16px;
+  letter-spacing:.04em;text-transform:uppercase;
+}
+.act-title{
+  background:#15803d;color:#fff;border-radius:14px;
+  padding:18px 24px;margin-bottom:24px;text-align:center;
+}
+.act-title h1{font-size:1.5rem;font-weight:800;margin-bottom:3px;}
+.act-title p{font-size:.9rem;opacity:.8;}
+.act-name-line{display:flex;gap:32px;margin-bottom:20px;font-size:.9rem;font-weight:600;color:#374151;}
+.act-name-line span{border-bottom:2px solid #374151;flex:1;min-height:26px;display:inline-block;margin-left:6px;}
+
+/* word bank */
+.act-bank{
+  display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;padding:10px 14px;
+  background:#fff;border:2px solid #86efac;border-radius:10px;
+}
+.act-bank span{font-size:.87rem;font-weight:600;color:#15803d;background:#f0fdf4;border:1px solid #86efac;padding:3px 10px;border-radius:7px;}
+
+/* cloze */
+.cloze-list{list-style:none;display:flex;flex-direction:column;gap:13px;}
+.cloze-list li{display:flex;align-items:baseline;gap:6px;font-size:.97rem;line-height:1.6;}
+.cloze-num{color:#15803d;font-weight:700;width:20px;flex-shrink:0;}
+.cloze-blank{border-bottom:2px solid #374151;display:inline-block;width:110px;margin:0 4px;vertical-align:bottom;}
+
+/* scramble */
+.scramble-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 36px;}
+.sc-row{display:flex;align-items:center;gap:8px;font-size:.92rem;padding:4px 0;}
+.sc-num{color:#15803d;font-weight:700;width:20px;flex-shrink:0;}
+.sc-word{font-family:monospace;font-size:.95rem;font-weight:700;color:#374151;letter-spacing:.1em;min-width:90px;}
+.sc-ans{border-bottom:2px solid #374151;flex:1;min-height:22px;}
+
+/* match */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;}
+.match-col-head{font-size:.8rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.match-row{display:flex;align-items:center;gap:8px;font-size:.92rem;padding:5px 0;border-bottom:1px solid #e5e7eb;}
+.match-num{color:#15803d;font-weight:700;width:20px;flex-shrink:0;}
+.match-ans{border-bottom:2px solid #374151;flex:1;min-height:22px;margin-left:4px;}
+
+/* word sort */
+.sort-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;}
+.sort-col{border:2px solid #86efac;border-radius:10px;overflow:hidden;}
+.sort-head{background:#15803d;color:#fff;text-align:center;font-weight:800;font-size:.9rem;padding:7px;letter-spacing:.04em;}
+.sort-body{padding:8px 10px;display:flex;flex-direction:column;gap:5px;}
+.sort-line{border-bottom:1px solid #d1d5db;height:24px;}
+
+/* build a sentence */
+.sent-grid{display:flex;flex-direction:column;gap:18px;}
+.sent-item .sent-word{font-weight:800;color:#15803d;font-size:.95rem;margin-bottom:6px;}
+.sent-line{border-bottom:2px solid #374151;height:28px;}
+
+/* answers toggle */
+.ans{display:none;color:#15803d;font-weight:700;font-size:.88rem;margin-left:4px;}
+.ans-words{display:none;flex-direction:column;gap:4px;}
+.ans-words .ans-word{font-size:.85rem;font-weight:700;color:#15803d;padding:2px 0;}
+.sort-lines{display:flex;flex-direction:column;gap:5px;}
+#act.show-ans .ans{display:inline;}
+#act.show-ans .ans-words{display:flex;}
+#act.show-ans .sort-lines{display:none;}
+
+/* cloze options */
+.cloze-opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px;}
+.cloze-opt{
+  font-size:.85rem;font-weight:600;padding:3px 11px;border-radius:8px;
+  border:1.5px solid #d1d5db;color:#374151;background:#f9fafb;
+}
+#act.show-ans .cloze-opt.correct{background:#dcfce7;color:#15803d;border-color:#16a34a;font-weight:800;}
+
+/* print */
+@media print{
+  #main,#sv,#sb-backdrop,.act-topbar{display:none!important;}
+  #act{display:block!important;position:static!important;overflow:visible!important;background:#fff!important;}
+  .act-content{padding:0;}
+  .act-page{page-break-after:always;margin-bottom:0;}
+  .act-page:last-child{page-break-after:avoid;}
+  .act-bank,.sort-col,.match-row,.cloze-list li,.sc-row,.sent-item{break-inside:avoid;}
+  @page{size:A4;margin:14mm 16mm;}
+}
 </style>
 </head>
 <body>
@@ -268,6 +362,17 @@ body{background:#f4f0fc;}
       </div>
     </div>
   </div>
+</div>
+
+<!-- ACTIVITY PAGE -->
+<div id="act">
+  <div class="act-topbar">
+    <button class="btn-back" onclick="closeActivity()">← Back</button>
+    <div class="topbar-title" style="color:#15803d;font-weight:800;">List 24 · Compound Words 2 — Activities</div>
+    <button id="btn-ans" class="btn-back" onclick="toggleAnswers()" style="margin-left:auto;">Show Answers</button>
+    <button class="btn-back" onclick="window.print()">🖨 Print</button>
+  </div>
+  <div class="act-content" id="act-content"></div>
 </div>
 
 <script>
@@ -451,7 +556,7 @@ const LISTS = [
   ]
 },
 {
-  num:24, title:"Compound Words 2",
+  num:24, title:"Compound Words 2", activity:true,
   rule:"Two words joined together to make a new word with a new meaning.",
   accent:"#16a34a", hlColor:"#15803d", hl:null,
   slides:[
@@ -724,13 +829,32 @@ function buildMain(){
     const d = document.createElement("div");
     d.className = "card";
     d.style.setProperty("--c", L.accent);
-    d.innerHTML = `
-      <div class="badge">${L.badge || 'List ' + L.num}</div>
-      <h2>${L.title}</h2>
-      <p style="color:${L.accent};font-weight:700;font-size:.9rem;margin-top:4px;">${countWords(L)} words</p>
-      <span class="arr">→</span>
-      ${L.worksheet ? `<a class="ws-link" href="${L.worksheet}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="--c:${L.accent}">Worksheet</a>` : ''}`;
-    d.onclick = ()=> openList(i);
+    if(L.activity){
+      d.innerHTML = `
+        <div class="badge">${L.badge || 'List ' + L.num}</div>
+        <h2>${L.title}</h2>
+        <p style="color:${L.accent};font-weight:700;font-size:.9rem;margin-top:4px;">${countWords(L)} words</p>
+        <div class="card-btns">
+          <button class="card-btn" style="--c:${L.accent}" onclick="event.stopPropagation();openList(${i})">Slides →</button>
+          <button class="card-btn card-btn-act" style="--c:${L.accent}" onclick="event.stopPropagation();openActivity()">Activities ✎</button>
+        </div>`;
+    } else if(L.worksheet){
+      d.innerHTML = `
+        <div class="badge">${L.badge || 'List ' + L.num}</div>
+        <h2>${L.title}</h2>
+        <p style="color:${L.accent};font-weight:700;font-size:.9rem;margin-top:4px;">${countWords(L)} words</p>
+        <div class="card-btns">
+          <button class="card-btn" style="--c:${L.accent}" onclick="event.stopPropagation();openList(${i})">Slides →</button>
+          <a class="card-btn card-btn-act" style="--c:${L.accent}" href="${L.worksheet}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Worksheet ✎</a>
+        </div>`;
+    } else {
+      d.innerHTML = `
+        <div class="badge">${L.badge || 'List ' + L.num}</div>
+        <h2>${L.title}</h2>
+        <p style="color:${L.accent};font-weight:700;font-size:.9rem;margin-top:4px;">${countWords(L)} words</p>
+        <span class="arr">→</span>`;
+      d.onclick = ()=> openList(i);
+    }
     g.appendChild(d);
   });
 }
@@ -948,6 +1072,180 @@ document.addEventListener("keydown",e=>{
     if(e.key==="Escape") closeSlides();
   }
 });
+
+// ══════════════════════════════════════════════════════
+//  LIST 24 ACTIVITY PAGE
+// ══════════════════════════════════════════════════════
+function openActivity(){
+  if(!document.getElementById("act-content").innerHTML) buildActivityPage();
+  document.getElementById("main").style.display = "none";
+  document.getElementById("act").style.display  = "block";
+}
+function closeActivity(){
+  document.getElementById("act").classList.remove("show-ans");
+  const btn = document.getElementById("btn-ans");
+  btn.textContent = "Show Answers"; btn.style.background=""; btn.style.color="";
+  document.getElementById("act").style.display  = "none";
+  document.getElementById("main").style.display = "flex";
+}
+function toggleAnswers(){
+  const act = document.getElementById("act");
+  const btn = document.getElementById("btn-ans");
+  const on = act.classList.toggle("show-ans");
+  btn.textContent = on ? "Hide Answers" : "Show Answers";
+  btn.style.background = on ? "#15803d" : "";
+  btn.style.color = on ? "#fff" : "";
+  btn.style.borderColor = on ? "#15803d" : "";
+}
+
+function buildActivityPage(){
+  const acc = "#16a34a";
+
+  // ─ Activity 1: Cloze with 3 options each ─
+  // opts: [A, B, C] — correct one marked with correct:true
+  const clozePairs = [
+    {s:"The ___ jumped onto the rock.",             w:"starfish",   opts:["sunshine","starfish","birthday"],   ci:1},
+    {s:"We played ___ after school.",               w:"football",   opts:["football","bedroom","playground"],  ci:0},
+    {s:"A ___ landed on my arm.",                   w:"butterfly",  opts:["rainbow","sunflower","butterfly"],  ci:2},
+    {s:"There was ___ to sit in the park.",         w:"nowhere",    opts:["nowhere","somewhere","anything"],   ci:0},
+    {s:"She did not see ___ in the dark.",          w:"anything",   opts:["everything","anything","nothing"],  ci:1},
+    {s:"It was my ___ and I got a cake.",           w:"birthday",   opts:["sunshine","bedroom","birthday"],    ci:2},
+    {s:"The ___ flowed down the mountain.",         w:"waterfall",  opts:["waterfall","playground","sunflower"],ci:0},
+    {s:"He looked ___ but could not find his cat.", w:"everywhere", opts:["somewhere","anywhere","everywhere"],ci:2},
+    {s:"We picked a ___ from the garden.",          w:"sunflower",  opts:["sunshine","sunflower","rainbow"],   ci:1},
+    {s:"The bright ___ lit up the sky.",            w:"sunshine",   opts:["sunshine","rainbow","starfish"],    ci:0},
+  ];
+
+  // ─ Activity 2: Scramble with letter-count hint ─
+  const scramblePairs = [
+    {sc:"ESNHINUS",   w:"sunshine"},
+    {sc:"HTYIRDAB",   w:"birthday"},
+    {sc:"OORDMBE",    w:"bedroom"},
+    {sc:"LLBTAOFO",   w:"football"},
+    {sc:"EUDISOT",    w:"outside"},
+    {sc:"WINABOR",    w:"rainbow"},
+    {sc:"SHRTIFAS",   w:"starfish"},
+    {sc:"LLAFRETAW",  w:"waterfall"},
+    {sc:"YFLTTREBU",  w:"butterfly"},
+    {sc:"DUGRONYLAP", w:"playground"},
+    {sc:"ROFLWNUSE",  w:"sunflower"},
+    {sc:"MREADAYDE",  w:"daydream"},
+  ];
+
+  // ─ Activity 3: Match the Halves ─
+  const matchA = ["sun","birth","bed","foot","out","rain","star","water","butter","play"];
+  // second parts displayed in shuffled order as word bank
+  const matchB = ["fly","day","room","ball","side","bow","fish","fall","ground","shine"];
+
+  // ─ Activity 4: Word Sort ─
+  const sortWords = ["nowhere","everything","someone","anytime","nothing","everybody",
+    "somewhere","anyone","everywhere","something","sometimes","nobody","anything","everyone","anywhere"];
+  const sortGroups = ["every–","some–","any–","no–"];
+
+  // ─ Activity 5: Build a Sentence ─
+  const sentWords = ["sunshine","birthday","playground","butterfly","waterfall","rainbow"];
+
+  // ─── Helpers ───
+  const nameBlock = `<div class="act-name-line">Name:&nbsp;<span></span>&nbsp;&nbsp;&nbsp;Date:&nbsp;<span style="max-width:130px"></span></div>`;
+  const titleBlock = `<div class="act-title"><h1>Compound Words 2 · List 24</h1><p>Follow-up Activities</p></div>`;
+  const bankOf = arr => `<div class="act-bank">${arr.map(w=>`<span>${w}</span>`).join("")}</div>`;
+
+  // answer key for match halves
+  const matchAnswers = ["sunshine","birthday","bedroom","football","outside","rainbow","starfish","waterfall","butterfly","playground"];
+  // answer key for sort
+  const sortAnswerMap = {
+    "every–":["everything","everybody","everyone","everywhere"],
+    "some–": ["something","sometimes","someone","somewhere"],
+    "any–":  ["anything","anytime","anyone","anywhere"],
+    "no–":   ["nothing","nobody","nowhere"],
+  };
+  // example sentences for act 5
+  const sentExamples = {
+    sunshine:   "The sunshine made the park feel warm.",
+    birthday:   "We had a party for his birthday.",
+    playground: "The children played on the playground.",
+    butterfly:  "A butterfly landed on the flower.",
+    waterfall:  "We heard the waterfall before we saw it.",
+    rainbow:    "A rainbow appeared after the rain.",
+  };
+
+  const letters = ['A','B','C'];
+
+  // ─── Act 1 ───
+  const act1 = `<div class="act-page">
+    ${titleBlock}${nameBlock}
+    <h2>Activity 1 — Cloze Sentences</h2>
+    <p style="font-size:.87rem;color:#6b7280;margin-bottom:14px">Circle the correct word to complete each sentence.</p>
+    <ul class="cloze-list">${clozePairs.map((p,i)=>`<li style="flex-direction:column;align-items:flex-start;gap:5px">
+      <span><span class="cloze-num">${i+1}.</span> ${p.s.replace("___",`<span class="cloze-blank"></span><span class="ans">${p.w}</span>`)}</span>
+      <div class="cloze-opts">${p.opts.map((o,j)=>`<span class="cloze-opt${j===p.ci?" correct":""}">${letters[j]}) ${o}</span>`).join("")}</div>
+    </li>`).join("")}</ul>
+  </div>`;
+
+  // ─── Act 2 ───
+  const act2 = `<div class="act-page">
+    ${titleBlock}${nameBlock}
+    <h2>Activity 2 — Unscramble the Letters</h2>
+    <p style="font-size:.87rem;color:#6b7280;margin-bottom:14px">Rearrange the letters to spell a compound word from List 24.</p>
+    <div class="scramble-grid">${scramblePairs.map((p,i)=>`<div class="sc-row">
+      <span class="sc-num">${i+1}.</span>
+      <span class="sc-word">${p.sc}</span>
+      <span class="sc-ans"><span class="ans">${p.w}</span></span>
+    </div>`).join("")}</div>
+  </div>`;
+
+  // ─── Act 3 ───
+  const act3 = `<div class="act-page">
+    ${titleBlock}${nameBlock}
+    <h2>Activity 3 — Match the Halves</h2>
+    <p style="font-size:.87rem;color:#6b7280;margin-bottom:10px">Add a second part from the box to make a compound word. Write the full word on the line.</p>
+    ${bankOf(matchB)}
+    <div class="match-grid">
+      <div><div class="match-col-head">First Part</div>
+        ${matchA.map((a,i)=>`<div class="match-row">
+          <span class="match-num">${i+1}.</span>
+          <span style="font-weight:700">${a}–</span>
+          <span class="match-ans"><span class="ans">${matchAnswers[i]}</span></span>
+        </div>`).join("")}
+      </div>
+      <div style="padding-left:8px"><div class="match-col-head">&nbsp;</div>
+        <p style="font-size:.82rem;color:#6b7280;font-style:italic;margin-top:12px">Tip: Each second part is used once.</p>
+      </div>
+    </div>
+  </div>`;
+
+  // ─── Act 4 ───
+  const act4 = `<div class="act-page">
+    ${titleBlock}${nameBlock}
+    <h2>Activity 4 — Word Sort</h2>
+    <p style="font-size:.87rem;color:#6b7280;margin-bottom:10px">Sort each word into the correct group.</p>
+    ${bankOf(sortWords)}
+    <div class="sort-grid">${sortGroups.map(g=>{
+      const ans = sortAnswerMap[g]||[];
+      return `<div class="sort-col">
+        <div class="sort-head">${g}</div>
+        <div class="sort-body">
+          <div class="sort-lines">${ans.map(()=>`<div class="sort-line"></div>`).join("")}</div>
+          <div class="ans-words">${ans.map(w=>`<div class="ans-word">${w}</div>`).join("")}</div>
+        </div>
+      </div>`;
+    }).join("")}</div>
+  </div>`;
+
+  // ─── Act 5 ───
+  const act5 = `<div class="act-page">
+    ${titleBlock}${nameBlock}
+    <h2>Activity 5 — Build a Sentence</h2>
+    <p style="font-size:.87rem;color:#6b7280;margin-bottom:16px">Write one sentence using each compound word.</p>
+    <div class="sent-grid">${sentWords.map(w=>`<div class="sent-item">
+      <div class="sent-word">${w}<span class="ans" style="font-weight:400;font-size:.82rem;margin-left:10px;font-style:italic">${sentExamples[w]}</span></div>
+      <div class="sent-line"></div>
+    </div>`).join("")}
+    </div>
+  </div>`;
+
+  document.getElementById("act-content").innerHTML = act1+act2+act3+act4+act5;
+}
 
 buildMain();
 </script>
