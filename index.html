@@ -298,6 +298,7 @@ body{background:#f4f0fc;}
 /* word sort */
 .sort-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;}
 .sort-grid.cols-3{grid-template-columns:1fr 1fr 1fr;}
+.sort-grid.cols-2{grid-template-columns:1fr 1fr;}
 .sort-col{border:2px solid var(--act-light);border-radius:10px;overflow:hidden;}
 .sort-head{background:var(--act-c);color:#fff;text-align:center;font-weight:800;font-size:.9rem;padding:7px;letter-spacing:.04em;}
 .sort-body{padding:8px 10px;display:flex;flex-direction:column;gap:5px;}
@@ -325,6 +326,59 @@ body{background:#f4f0fc;}
 }
 #act.show-ans .cloze-opt.correct{background:var(--act-tint);color:var(--act-c);border-color:var(--act-bold);font-weight:800;}
 
+
+/* speed read */
+.speed-grid{display:grid;grid-template-columns:repeat(5,1fr);border:2px solid var(--act-light);border-radius:10px;overflow:hidden;background:#fff;}
+.speed-cell{padding:10px 4px;text-align:center;font-size:1rem;font-weight:700;color:#374151;border-right:1px solid var(--act-border);border-bottom:1px solid var(--act-border);}
+.speed-times{display:flex;gap:14px;margin-top:16px;}
+.speed-box{flex:1;border:2px solid var(--act-light);border-radius:10px;padding:9px 10px;text-align:center;background:#fff;}
+.speed-box b{display:block;font-size:.76rem;color:var(--act-c);text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px;}
+.speed-box i{display:block;border-bottom:2px solid #374151;height:24px;}
+
+/* missing letters */
+.miss-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px 36px;}
+.miss-word{font-family:monospace;font-size:1.05rem;font-weight:700;letter-spacing:.16em;color:#374151;min-width:112px;}
+
+/* cut-out word cards */
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.cut-card{border:2px dashed #9ca3af;border-radius:8px;padding:13px 4px;text-align:center;font-size:1rem;font-weight:700;color:#374151;background:#fff;}
+.cards-note{font-size:.84rem;color:#6b7280;font-style:italic;margin:16px 0 8px;}
+.frame-line{border-bottom:2px solid #374151;height:32px;margin-bottom:14px;}
+
+/* proofread */
+.proof-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.proof-row{display:flex;align-items:baseline;gap:8px;font-size:.95rem;line-height:1.6;flex-wrap:wrap;}
+.proof-fix{border-bottom:2px solid #374151;min-width:130px;display:inline-block;height:20px;}
+
+/* syllable split */
+.syl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;}
+.syl-row{display:flex;align-items:center;gap:8px;font-size:.95rem;}
+.syl-w{font-weight:700;color:#374151;min-width:94px;}
+.syl-box{border-bottom:2px solid #374151;min-width:64px;height:22px;flex:1;}
+.syl-slash{color:var(--act-c);font-weight:800;}
+
+/* odd one out */
+.odd-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #e5e7eb;flex-wrap:wrap;}
+.odd-w{font-size:.95rem;font-weight:600;color:#374151;border:1.5px solid #d1d5db;border-radius:8px;padding:4px 13px;background:#f9fafb;}
+#act.show-ans .odd-w.odd-correct{background:var(--act-tint);border-color:var(--act-bold);color:var(--act-c);font-weight:800;}
+.odd-why{flex-basis:100%;font-size:.82rem;color:var(--act-c);font-style:italic;}
+
+/* code breaker */
+.code-key{display:flex;flex-wrap:wrap;gap:4px 6px;margin-bottom:15px;padding:11px 14px;background:#fff;border:2px solid var(--act-light);border-radius:10px;}
+.code-key span{font-size:.76rem;font-weight:700;color:var(--act-c);min-width:40px;text-align:center;}
+.code-row{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:.92rem;}
+.code-nums{font-family:monospace;font-weight:700;color:#374151;letter-spacing:.05em;min-width:170px;}
+
+/* word search */
+.ws-grid{display:grid;margin:0 auto 16px;border:2px solid var(--act-light);border-radius:8px;overflow:hidden;width:max-content;background:#fff;}
+.ws-cell{width:27px;height:27px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:.92rem;font-weight:700;color:#374151;border-right:1px solid var(--act-border);border-bottom:1px solid var(--act-border);}
+#act.show-ans .ws-cell.ws-hit{background:var(--act-tint);color:var(--act-c);}
+
+/* sentence starter */
+.sent-row{display:flex;align-items:flex-end;gap:8px;}
+.sent-row .sent-line{flex:1;}
+.sent-starter{font-size:.95rem;color:#374151;font-weight:600;white-space:nowrap;}
+
 /* print */
 @media print{
   #main,#sv,#sb-backdrop,.act-topbar{display:none!important;}
@@ -333,6 +387,7 @@ body{background:#f4f0fc;}
   .act-page{page-break-after:always;margin-bottom:0;}
   .act-page:last-child{page-break-after:avoid;}
   .act-bank,.sort-col,.match-row,.cloze-list li,.sc-row,.sent-item{break-inside:avoid;}
+  .speed-grid,.ws-grid,.cut-card,.odd-row,.proof-row,.syl-row,.code-row,.miss-grid{break-inside:avoid;}
   @page{size:A4;margin:14mm 16mm;}
 }
 </style>
@@ -399,6 +454,74 @@ const LISTS = [
   title:"Year 3 High-Frequency Words",
   rule:"Heart words are common words that appear often in reading and writing.\nLearn to read and spell these words by heart.",
   accent:"#db2777", hlColor:"#be185d", hl:null,
+  activity:{
+    title:"Heart Words \u00b7 Year 3",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"speedread",
+        title:"Speed Read",
+        instr:"Read the grid across each row. Time yourself three times and write your times below. Try to beat your last time.",
+        words:["any","also","ask","ever","many",
+               "very","help","their","through","bought",
+               "really","hour","gone","never","always",
+               "house","eyes","more","once","our",
+               "fast","last","their","through","bought",
+               "really","always","house","eyes","any"]
+      },
+      {
+        type:"missing",
+        title:"Missing Letters",
+        instr:"Fill in the missing letters, then write the whole word on the line.",
+        bank:["any","also","ever","many","very","their","through","bought","really","hour","always","house","eyes","once"],
+        items:[
+          {q:"a_y",     w:"any"},
+          {q:"al_o",    w:"also"},
+          {q:"e_er",    w:"ever"},
+          {q:"ma_y",    w:"many"},
+          {q:"v_ry",    w:"very"},
+          {q:"th__r",   w:"their"},
+          {q:"thr___h", w:"through"},
+          {q:"b___ht",  w:"bought"},
+          {q:"r__lly",  w:"really"},
+          {q:"h__r",    w:"hour"},
+          {q:"alw__s",  w:"always"},
+          {q:"h__se",   w:"house"},
+          {q:"e_es",    w:"eyes"},
+          {q:"o_ce",    w:"once"},
+        ]
+      },
+      {
+        type:"cards",
+        title:"Word Cards",
+        instr:"Cut out the cards. Lay them out to build each sentence below, then copy your sentence onto the line.",
+        cards:["any","also","ask","ever","many","very","help","their",
+               "through","bought","really","hour","gone","never","always","house",
+               "eyes","more","once","our","fast","last","I","we",
+               "the","to","and","my","was","is"],
+        frames:[
+          "1. Build a sentence using the cards: their + house",
+          "2. Build a sentence using the cards: always + help",
+          "3. Build a sentence using the cards: bought + more",
+          "4. Build your own sentence using any four cards."
+        ]
+      },
+      {
+        type:"sentence",
+        title:"Build a Sentence",
+        instr:"Finish each sentence. The beginning has been started for you.",
+        bank:["their","through","bought","always","once","really"],
+        items:[
+          {w:"their",   starter:"Their new house",   example:"Their new house is near the park."},
+          {w:"through", starter:"We walked through", example:"We walked through the long tunnel."},
+          {w:"bought",  starter:"Mum bought",        example:"Mum bought a new lunchbox for me."},
+          {w:"always",  starter:"I always",          example:"I always tidy my desk after lunch."},
+          {w:"once",    starter:"Once a week we",    example:"Once a week we go to the library."},
+          {w:"really",  starter:"The game was really", example:"The game was really fun to watch."},
+        ]
+      }
+    ]
+  },
   slides:[
     "any","also","ask","ever","many","very",
     "any","help","their","through","bought","really",
@@ -512,6 +635,81 @@ const LISTS = [
   num:22, title:"Homophones 1",
   rule:"Homophones are words that sound the same but have different spellings and meanings.\nCheck the meaning to choose the correct spelling.",
   accent:"#dc2626", hlColor:"#b91c1c", hl:null,
+  activity:{
+    title:"Homophones 1 \u00b7 List 22",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"match",
+        title:"Match the Meaning",
+        instr:"Write the correct meaning from the box next to each word.",
+        leftHead:"Word",
+        tip:"Tip: Each meaning is used once.",
+        bank:["a story","with your ears","the number 2","not strong","belonging to them","used for baking",
+              "ocean water","they are","to purchase","also, or very","like a rabbit","a male child"],
+        pairs:[
+          {l:"two",     r:"the number 2"},
+          {l:"too",     r:"also, or very"},
+          {l:"their",   r:"belonging to them"},
+          {l:"they're", r:"they are"},
+          {l:"hear",    r:"with your ears"},
+          {l:"sea",     r:"ocean water"},
+          {l:"buy",     r:"to purchase"},
+          {l:"son",     r:"a male child"},
+          {l:"weak",    r:"not strong"},
+          {l:"tale",    r:"a story"},
+          {l:"flour",   r:"used for baking"},
+          {l:"hare",    r:"like a rabbit"},
+        ]
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"I can ___ the birds singing outside.",   ans:"hear",  opts:["here","hear","hair"],    ci:1},
+          {s:"We swam in the ___ at the beach.",       ans:"sea",   opts:["sea","see","say"],       ci:0},
+          {s:"___ bags are by the classroom door.",    ans:"Their", opts:["There","They're","Their"],ci:2},
+          {s:"Mum will ___ some milk at the shop.",    ans:"buy",   opts:["by","buy","bye"],        ci:1},
+          {s:"He was too ___ to lift the heavy box.",  ans:"weak",  opts:["weak","week","wick"],    ci:0},
+          {s:"Nan told us a ___ about a brave girl.",  ans:"tale",  opts:["tail","tall","tale"],    ci:2},
+          {s:"We need ___ to make the cake.",          ans:"flour", opts:["flower","flour","floor"],ci:1},
+          {s:"Do you ___ the answer to this one?",     ans:"know",  opts:["know","no","now"],       ci:0},
+          {s:"Please ___ your name at the top.",       ans:"write", opts:["right","white","write"], ci:2},
+          {s:"The ___ shone all afternoon.",           ans:"sun",   opts:["son","sun","soon"],      ci:1},
+        ]
+      },
+      {
+        type:"proofread",
+        title:"Find the Mistake",
+        instr:"Each sentence has ONE homophone spelt wrongly. Circle it, then write the correct word on the line.",
+        items:[
+          {s:"On Saturday we went too the beach.",          wrong:"too",   right:"to"},
+          {s:"I could here the waves from the car park.",   wrong:"here",  right:"hear"},
+          {s:"My brother wanted to by an ice cream.",       wrong:"by",    right:"buy"},
+          {s:"Their were lots of people on the sand.",      wrong:"Their", right:"There"},
+          {s:"We saw a crab with a long tale.",             wrong:"tale",  right:"tail"},
+          {s:"Mum said the water was to cold to swim.",     wrong:"to",    right:"too"},
+          {s:"A big flour was growing beside the path.",    wrong:"flour", right:"flower"},
+          {s:"I did not no the way home.",                  wrong:"no",    right:"know"},
+        ]
+      },
+      {
+        type:"sentence",
+        title:"Build a Sentence",
+        instr:"Finish each sentence. The beginning has been started for you.",
+        bank:["their","there","hear","buy","sea","write"],
+        items:[
+          {w:"their", starter:"Their team",              example:"Their team won the game on Friday."},
+          {w:"there", starter:"Over there I can see",     example:"Over there I can see a tall tree."},
+          {w:"hear",  starter:"I can hear",               example:"I can hear the rain on the roof."},
+          {w:"buy",   starter:"After school we will buy", example:"After school we will buy some fruit."},
+          {w:"sea",   starter:"The sea was",              example:"The sea was calm and blue today."},
+          {w:"write", starter:"I will write",             example:"I will write a letter to my nan."},
+        ]
+      }
+    ]
+  },
   slides:[
     {s:"to / two / too"},
     {w:"to",sub:"direction: go to school"},
@@ -642,14 +840,15 @@ const LISTS = [
       {
         type:"sentence",
         title:"Build a Sentence",
-        instr:"Write one sentence using each compound word.",
+        instr:"Finish each sentence. The beginning has been started for you.",
+        bank:["sunshine","birthday","playground","butterfly","waterfall","rainbow"],
         items:[
-          {w:"sunshine",   example:"The sunshine made the park feel warm."},
-          {w:"birthday",   example:"We had a party for his birthday."},
-          {w:"playground", example:"The children played on the playground."},
-          {w:"butterfly",  example:"A butterfly landed on the flower."},
-          {w:"waterfall",  example:"We heard the waterfall before we saw it."},
-          {w:"rainbow",    example:"A rainbow appeared after the rain."},
+          {w:"sunshine",   starter:"The sunshine made",       example:"The sunshine made the park feel warm."},
+          {w:"birthday",   starter:"On my birthday we",       example:"On my birthday we had a party at home."},
+          {w:"playground", starter:"At the playground I like to", example:"At the playground I like to climb the bars."},
+          {w:"butterfly",  starter:"A butterfly landed on",   example:"A butterfly landed on the yellow flower."},
+          {w:"waterfall",  starter:"We heard the waterfall",  example:"We heard the waterfall before we saw it."},
+          {w:"rainbow",    starter:"A rainbow appeared",      example:"A rainbow appeared after the rain stopped."},
         ]
       }
     ]
@@ -810,14 +1009,15 @@ const LISTS = [
       {
         type:"sentence",
         title:"Build a Sentence",
-        instr:"Write one sentence using each contraction. Underline the contraction.",
+        instr:"Finish each sentence and underline the contraction. The beginning has been started for you.",
+        bank:["I'm","she's","we've","they'll","don't","that's"],
         items:[
-          {w:"I'm",    example:"I'm going to the library after school."},
-          {w:"she's",  example:"She's reading a new book."},
-          {w:"we've",  example:"We've been waiting for the bus."},
-          {w:"they'll",example:"They'll meet us at the park."},
-          {w:"don't",  example:"Please don't open the door yet."},
-          {w:"that's", example:"That's the answer I was looking for."},
+          {w:"I'm",     starter:"I'm going to",        example:"I'm going to the library after school."},
+          {w:"she's",   starter:"She's reading",       example:"She's reading a new book about sharks."},
+          {w:"we've",   starter:"We've been",          example:"We've been waiting for the bus for ages."},
+          {w:"they'll", starter:"They'll meet us",     example:"They'll meet us at the park at three."},
+          {w:"don't",   starter:"Please don't",        example:"Please don't open the door yet."},
+          {w:"that's",  starter:"That's the",          example:"That's the answer I was looking for."},
         ]
       }
     ]
@@ -883,6 +1083,66 @@ const LISTS = [
   num:29, title:"Syllable Division: Trumpet Rule",
   rule:"Words with the pattern VCCV are divided between the two consonants.\ntrum / pet. This helps us read and spell longer words.",
   accent:"#0d9488", hlColor:"#0f766e", hl:null,
+  activity:{
+    title:"Syllable Division \u00b7 List 29",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"syllable",
+        title:"Syllable Split",
+        instr:"Clap the word, then write the two syllables in the boxes. Divide between the two consonants.",
+        items:[
+          {w:"trumpet", syl:"trum/pet"},
+          {w:"basket",  syl:"bas/ket"},
+          {w:"rabbit",  syl:"rab/bit"},
+          {w:"mitten",  syl:"mit/ten"},
+          {w:"butter",  syl:"but/ter"},
+          {w:"dinner",  syl:"din/ner"},
+          {w:"letter",  syl:"let/ter"},
+          {w:"pepper",  syl:"pep/per"},
+          {w:"kitten",  syl:"kit/ten"},
+          {w:"button",  syl:"but/ton"},
+          {w:"ribbon",  syl:"rib/bon"},
+          {w:"carrot",  syl:"car/rot"},
+        ]
+      },
+      {
+        type:"sort",
+        title:"Word Sort",
+        instr:"Sort each word into the correct group.",
+        words:["rabbit","happy","little","basket","penny","middle","mitten","funny","bottle","trumpet","silly","puddle"],
+        groups:["VC\u00b7CV words","-y ending","-le ending"],
+        answers:{
+          "VC\u00b7CV words":["rabbit","basket","mitten","trumpet"],
+          "-y ending":  ["happy","penny","funny","silly"],
+          "-le ending": ["little","middle","bottle","puddle"],
+        }
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"The ___ played one loud note.",           ans:"trumpet", opts:["trumpet","basket","rabbit"], ci:0},
+          {s:"She put the apples in the ___.",          ans:"basket",  opts:["button","basket","letter"],  ci:1},
+          {s:"A little ___ hopped across the grass.",   ans:"rabbit",  opts:["kitten","ribbon","rabbit"],  ci:2},
+          {s:"We had ___ at six o'clock.",              ans:"dinner",  opts:["dinner","pepper","tennis"],  ci:0},
+          {s:"I spread ___ on my toast.",               ans:"butter",  opts:["ribbon","butter","cotton"],  ci:1},
+          {s:"He posted the ___ this morning.",         ans:"letter",  opts:["carrot","better","letter"],  ci:2},
+          {s:"A ___ fell off my school shirt.",         ans:"button",  opts:["button","puddle","muddle"],  ci:0},
+          {s:"She jumped in the ___ after the rain.",   ans:"puddle",  opts:["middle","puddle","saddle"],  ci:1},
+          {s:"The ___ sat in the middle of the mat.",   ans:"puppy",   opts:["penny","jelly","puppy"],     ci:2},
+          {s:"We tied a red ___ around the box.",       ans:"ribbon",  opts:["ribbon","riddle","rattle"],  ci:0},
+        ]
+      },
+      {
+        type:"code",
+        title:"Code Breaker",
+        instr:"Use the code to work out each word, then write it on the line. A=1, B=2, and so on.",
+        items:["rabbit","basket","kitten","button","carrot","tennis","puppy","bottle"]
+      }
+    ]
+  },
   slides:[
     {s:"VC·CV: divide between the two consonants"},
     {w:"trumpet",syl:"trum·pet"},{w:"basket",syl:"bas·ket"},{w:"rabbit",syl:"rab·bit"},
@@ -1033,14 +1293,15 @@ const LISTS = [
       {
         type:"sentence",
         title:"Build a Sentence",
-        instr:"Write one sentence using each word. Underline the suffix word.",
+        instr:"Finish each sentence and underline the suffix word. The beginning has been started for you.",
+        bank:["quickly","softly","bigger","faster","biggest","kindest"],
         items:[
-          {w:"quickly", example:"She quickly tied her shoes before the race."},
-          {w:"softly",  example:"The baby cried softly in her sleep."},
-          {w:"bigger",  example:"An elephant is bigger than a horse."},
-          {w:"faster",  example:"I can run faster than my brother."},
-          {w:"biggest", example:"That is the biggest tree in the park."},
-          {w:"kindest", example:"She is the kindest person I know."},
+          {w:"quickly", starter:"She quickly",        example:"She quickly tied her shoes before the race."},
+          {w:"softly",  starter:"The baby cried softly", example:"The baby cried softly in her sleep."},
+          {w:"bigger",  starter:"An elephant is bigger", example:"An elephant is bigger than a horse."},
+          {w:"faster",  starter:"I can run faster",    example:"I can run faster than my brother."},
+          {w:"biggest", starter:"That is the biggest", example:"That is the biggest tree in the park."},
+          {w:"kindest", starter:"She is the kindest",  example:"She is the kindest person I know."},
         ]
       }
     ]
@@ -1073,6 +1334,62 @@ const LISTS = [
   num:33, title:"Trigraph 'tch'",
   rule:"A trigraph is three letters that spell ONE sound.\n'tch' is used at the end of a one-syllable word, straight after a short vowel.",
   accent:"#0891b2", hlColor:"#0e7490", hl:"tch",
+  activity:{
+    title:"Trigraph 'tch' \u00b7 List 33",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"sort",
+        title:"Word Sort",
+        instr:"Sort each word by its ending. Look at the letter that comes before the ch sound.",
+        words:["catch","much","pitch","lunch","fetch","bench","ditch","rich","match","such","hutch","munch"],
+        groups:["tch","ch"],
+        answers:{
+          "tch":["catch","pitch","fetch","ditch","match","hutch"],
+          "ch": ["much","lunch","bench","rich","such","munch"],
+        }
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"Try to ___ the ball with both hands.",   ans:"catch",   opts:["catch","ketchup","kitchen"],   ci:0},
+          {s:"She used a needle to ___ the hole.",     ans:"stitch",  opts:["switch","stitch","sketch"],    ci:1},
+          {s:"Please ___ me a glass of water.",        ans:"fetch",   opts:["notch","patch","fetch"],       ci:2},
+          {s:"We watched the netball ___ on Saturday.",ans:"match",   opts:["match","batch","botch"],       ci:0},
+          {s:"The rabbit lives in a wooden ___.",      ans:"hutch",   opts:["hatch","hutch","ditch"],       ci:1},
+          {s:"Mum baked a ___ of muffins.",            ans:"batch",   opts:["patch","thatch","batch"],      ci:2},
+          {s:"He turned off the light ___.",           ans:"switch",  opts:["switch","snatch","scratch"],   ci:0},
+          {s:"I drew a quick ___ of the tree.",        ans:"sketch",  opts:["stretch","sketch","stitch"],   ci:1},
+          {s:"Try not to ___ the itchy bite.",         ans:"scratch", opts:["snatch","clutch","scratch"],   ci:2},
+          {s:"The rain ran down into the ___.",        ans:"ditch",   opts:["ditch","pitch","notch"],       ci:0},
+        ]
+      },
+      {
+        type:"wordsearch",
+        title:"Word Search",
+        instr:"Find all twelve 'tch' words. They can go across, down, diagonally, and backwards.",
+        size:12, seed:33,
+        words:["catch","pitch","match","fetch","ditch","hutch","witch","notch","patch","batch","stitch","switch"]
+      },
+      {
+        type:"oddoneout",
+        title:"Odd One Out",
+        instr:"Circle the word that does NOT use 'tch'. Be ready to say why it is different.",
+        items:[
+          {words:["catch","match","beach","pitch"],        ans:"beach",   why:"'ea' is a vowel team, so it takes ch, not tch"},
+          {words:["fetch","bench","ditch","hutch"],        ans:"bench",   why:"the consonant n comes before the ch, so no t is needed"},
+          {words:["witch","lunch","notch","batch"],        ans:"lunch",   why:"the consonant n comes before the ch, so no t is needed"},
+          {words:["scratch","teach","stitch","clutch"],    ans:"teach",   why:"'ea' is a vowel team, so it takes ch, not tch"},
+          {words:["sketch","munch","switch","botch"],      ans:"munch",   why:"the consonant n comes before the ch, so no t is needed"},
+          {words:["twitch","coach","patch","latch"],       ans:"coach",   why:"'oa' is a vowel team, so it takes ch, not tch"},
+          {words:["stretch","rich","snatch","thatch"],     ans:"rich",    why:"rich, much, such and which are exceptions you learn by heart"},
+          {words:["hatchet","ketchup","kitchen","chicken"],ans:"chicken", why:"here the ch starts a syllable, so there is no t"},
+        ]
+      }
+    ]
+  },
   slides:[
     {s:"short vowel + tch"},
     "catch","latch","hutch","pitch","hatch","fetch","ditch","stitch","snatch","hatchet",
@@ -1393,6 +1710,14 @@ function renderActivitySection(sec, n){
     case 'match':     return head + renderMatch(sec);
     case 'sort':      return head + renderSort(sec);
     case 'sentence':  return head + renderSentence(sec);
+    case 'speedread': return head + renderSpeedRead(sec);
+    case 'missing':   return head + renderMissing(sec);
+    case 'cards':     return head + renderCards(sec);
+    case 'proofread': return head + renderProofread(sec);
+    case 'syllable':  return head + renderSyllable(sec);
+    case 'oddoneout': return head + renderOddOne(sec);
+    case 'code':      return head + renderCode(sec);
+    case 'wordsearch':return head + renderWordSearch(sec);
     default: return head + `<p>Unknown activity type: ${sec.type}</p>`;
   }
 }
@@ -1439,7 +1764,7 @@ function renderMatch(sec){
 }
 
 function renderSort(sec){
-  const cols = sec.groups.length === 3 ? ' cols-3' : '';
+  const cols = sec.groups.length === 3 ? ' cols-3' : (sec.groups.length === 2 ? ' cols-2' : '');
   return `<div class="act-bank">${sec.words.map(w=>`<span>${w}</span>`).join("")}</div>
     <div class="sort-grid${cols}">${sec.groups.map(g=>{
       const ans = sec.answers[g]||[];
@@ -1454,11 +1779,124 @@ function renderSort(sec){
 }
 
 function renderSentence(sec){
-  return `<div class="sent-grid">${sec.items.map(it=>`<div class="sent-item">
+  const bankHTML = sec.bank ? `<div class="act-bank">${sec.bank.map(w=>`<span>${w}</span>`).join("")}</div>` : '';
+  return bankHTML + `<div class="sent-grid">${sec.items.map(it=>`<div class="sent-item">
     <div class="sent-word">${it.w}<span class="ans" style="font-weight:400;font-size:.82rem;margin-left:10px;font-style:italic">${it.example}</span></div>
-    <div class="sent-line"></div>
+    <div class="sent-row">${it.starter ? `<span class="sent-starter">${it.starter}</span>` : ''}<span class="sent-line"></span></div>
   </div>`).join("")}
   </div>`;
+}
+
+function renderSpeedRead(sec){
+  const cells = sec.words.map(w=>`<div class="speed-cell">${w}</div>`).join("");
+  return `<div class="speed-grid">${cells}</div>
+    <div class="speed-times">
+      <div class="speed-box"><b>Read 1</b><i></i></div>
+      <div class="speed-box"><b>Read 2</b><i></i></div>
+      <div class="speed-box"><b>Read 3</b><i></i></div>
+    </div>`;
+}
+
+function renderMissing(sec){
+  const bankHTML = sec.bank ? `<div class="act-bank">${sec.bank.map(w=>`<span>${w}</span>`).join("")}</div>` : '';
+  return bankHTML + `<div class="miss-grid">${sec.items.map((p,i)=>`<div class="sc-row">
+    <span class="sc-num">${i+1}.</span>
+    <span class="miss-word">${p.q}</span>
+    <span class="sc-ans"><span class="ans">${p.w}</span></span>
+  </div>`).join("")}</div>`;
+}
+
+function renderCards(sec){
+  const cards = sec.cards.map(w=>`<div class="cut-card">${w}</div>`).join("");
+  const frames = (sec.frames||[]).map(f=>`<p class="cards-note">${f}</p><div class="frame-line"></div>`).join("");
+  return `<div class="cards-grid">${cards}</div>${frames}`;
+}
+
+function renderProofread(sec){
+  return `<ol class="proof-list">${sec.items.map((p,i)=>`<li class="proof-row">
+    <span class="cloze-num">${i+1}.</span>
+    <span>${p.s}</span>
+    <span class="proof-fix"><span class="ans">${p.wrong} &rarr; ${p.right}</span></span>
+  </li>`).join("")}</ol>`;
+}
+
+function renderSyllable(sec){
+  return `<div class="syl-grid">${sec.items.map((p,i)=>{
+    const parts = p.syl.split("/");
+    return `<div class="syl-row">
+      <span class="sc-num">${i+1}.</span>
+      <span class="syl-w">${p.w}</span>
+      <span class="syl-box"><span class="ans">${parts[0]}</span></span>
+      <span class="syl-slash">/</span>
+      <span class="syl-box"><span class="ans">${parts[1]||""}</span></span>
+    </div>`;
+  }).join("")}</div>`;
+}
+
+function renderOddOne(sec){
+  return `<div>${sec.items.map((p,i)=>`<div class="odd-row">
+    <span class="cloze-num">${i+1}.</span>
+    ${p.words.map(w=>`<span class="odd-w${w===p.ans?" odd-correct":""}">${w}</span>`).join("")}
+    <span class="odd-why ans">${p.ans}: ${p.why}</span>
+  </div>`).join("")}</div>`;
+}
+
+function renderCode(sec){
+  const AZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const key = `<div class="code-key">${AZ.split("").map((c,i)=>`<span>${c}=${i+1}</span>`).join("")}</div>`;
+  const rows = sec.items.map((w,i)=>{
+    const nums = w.toUpperCase().split("").map(c=>AZ.indexOf(c)+1).join(" - ");
+    return `<div class="code-row">
+      <span class="sc-num">${i+1}.</span>
+      <span class="code-nums">${nums}</span>
+      <span class="sc-ans"><span class="ans">${w}</span></span>
+    </div>`;
+  }).join("");
+  return key + `<div>${rows}</div>`;
+}
+
+// Deterministic word-search builder: same grid every time the page loads,
+// so a printed worksheet always matches its answer key.
+function buildGrid(words, size, seed){
+  let st = seed || 7;
+  const rnd = ()=>{ st = (st * 1103515245 + 12345) & 0x7fffffff; return st / 0x7fffffff; };
+  const grid = Array.from({length:size}, ()=>Array(size).fill(null));
+  const dirs = [[0,1],[1,0],[1,1],[-1,1],[0,-1],[-1,0],[-1,-1],[1,-1]];
+  const placed = [];
+  words.forEach(word=>{
+    const W = word.toUpperCase().replace(/[^A-Z]/g,"");
+    if(W.length > size) return;
+    for(let att=0; att<400; att++){
+      const d  = dirs[Math.floor(rnd()*dirs.length)];
+      const r0 = Math.floor(rnd()*size), c0 = Math.floor(rnd()*size);
+      const r1 = r0 + d[0]*(W.length-1), c1 = c0 + d[1]*(W.length-1);
+      if(r1<0 || r1>=size || c1<0 || c1>=size) continue;
+      let ok = true;
+      for(let i=0;i<W.length;i++){
+        const cell = grid[r0+d[0]*i][c0+d[1]*i];
+        if(cell && cell !== W[i]){ ok = false; break; }
+      }
+      if(!ok) continue;
+      for(let i=0;i<W.length;i++) grid[r0+d[0]*i][c0+d[1]*i] = W[i];
+      placed.push(word);
+      break;
+    }
+  });
+  const hit = grid.map(row=>row.map(c=>c !== null));
+  const AZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  for(let r=0;r<size;r++) for(let c=0;c<size;c++)
+    if(!grid[r][c]) grid[r][c] = AZ[Math.floor(rnd()*26)];
+  return {grid, hit, placed};
+}
+
+function renderWordSearch(sec){
+  const size = sec.size || 12;
+  const g = buildGrid(sec.words, size, sec.seed);
+  const cells = [];
+  for(let r=0;r<size;r++) for(let c=0;c<size;c++)
+    cells.push(`<div class="ws-cell${g.hit[r][c]?" ws-hit":""}">${g.grid[r][c]}</div>`);
+  const bank = `<div class="act-bank">${g.placed.map(w=>`<span>${w}</span>`).join("")}</div>`;
+  return bank + `<div class="ws-grid" style="grid-template-columns:repeat(${size},27px)">${cells.join("")}</div>`;
 }
 
 buildMain();
