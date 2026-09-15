@@ -543,6 +543,62 @@ const LISTS = [
     if(/or/.test(w)) return "or";
     return null;
   },
+  activity:{
+    title:"R-Controlled ar / or \u00b7 List 18",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"sort",
+        title:"Word Sort",
+        instr:"Sort each word by its r-controlled vowel.",
+        words:["dark","corn","start","storm","garden","north","sharp","horse","farm","sport","march","torch"],
+        groups:["ar","or"],
+        answers:{
+          "ar":["dark","start","garden","sharp","farm","march"],
+          "or":["corn","storm","north","horse","sport","torch"],
+        }
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"We drove out to the ___ to see the cows.", ans:"farm",    opts:["farm","form","firm"],         ci:0},
+          {s:"The ___ ran across the paddock.",          ans:"horse",   opts:["house","horse","hose"],       ci:1},
+          {s:"It was too ___ to see the path.",          ans:"dark",    opts:["bark","park","dark"],         ci:2},
+          {s:"A loud ___ woke us in the night.",         ans:"storm",   opts:["storm","stork","store"],      ci:0},
+          {s:"We planted seeds in the ___.",             ans:"garden",  opts:["golden","garden","gander"],   ci:1},
+          {s:"Be careful, that knife is very ___.",      ans:"sharp",   opts:["shark","sheep","sharp"],      ci:2},
+          {s:"He plays ___ every Saturday morning.",     ans:"sport",   opts:["sport","spot","sprout"],      ci:0},
+          {s:"We walked ___ towards the hills.",         ans:"north",   opts:["notch","north","worth"],      ci:1},
+          {s:"She held a ___ to light the dark cave.",   ans:"torch",   opts:["touch","teach","torch"],      ci:2},
+          {s:"We shared a bag of ___ at the movies.",    ans:"popcorn", opts:["popcorn","popping","pouring"],ci:0},
+        ]
+      },
+      {
+        type:"wordsearch",
+        title:"Word Search",
+        instr:"Find all twelve 'ar' and 'or' words. They can go across, down, diagonally, and backwards.",
+        size:12, seed:18,
+        words:["dark","start","sharp","spark","garden","smart","corn","storm","north","torch","horse","sport"]
+      },
+      {
+        type:"proofread",
+        title:"Find the Mistake",
+        instr:"Each sentence has ONE word with the wrong r-controlled vowel. Circle it, then write it correctly.",
+        items:[
+          {s:"The cows ate the yellow carn.",         wrong:"carn",   right:"corn"},
+          {s:"We planted seeds in the gorden.",       wrong:"gorden", right:"garden"},
+          {s:"Be careful, that knife is shorp.",      wrong:"shorp",  right:"sharp"},
+          {s:"A loud starm woke us in the night.",    wrong:"starm",  right:"storm"},
+          {s:"We walked narth towards the hills.",    wrong:"narth",  right:"north"},
+          {s:"The harse ran across the paddock.",     wrong:"harse",  right:"horse"},
+          {s:"It was too dork to see the path.",      wrong:"dork",   right:"dark"},
+          {s:"The race will stort at ten o'clock.",   wrong:"stort",  right:"start"},
+        ]
+      }
+    ]
+  },
   slides:[
     {s:"'ar' words"},
     "harm","dark","car","start","arm","jar","bar","cart",
@@ -566,6 +622,76 @@ const LISTS = [
   hlFn: w=>{
     if(w.endsWith("y")) return "y";
     return null;
+  },
+  activity:{
+    title:"'y' as a Vowel \u00b7 List 19",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"sort",
+        title:"Word Sort",
+        instr:"Sort each word by the sound the 'y' makes at the end.",
+        words:["cry","happy","sky","funny","fly","silly","try","puppy","dry","windy","spy","lucky"],
+        groups:["'y' = long /i/","'y' = long /e/"],
+        answers:{
+          "'y' = long /i/":["cry","sky","fly","try","dry","spy"],
+          "'y' = long /e/":["happy","funny","silly","puppy","windy","lucky"],
+        }
+      },
+      {
+        type:"transform",
+        title:"Add the 'y'",
+        instr:"Add 'y' to each base word. Careful: some short words need the last letter doubled first.",
+        items:[
+          {from:"fun",   to:"funny"},
+          {from:"sun",   to:"sunny"},
+          {from:"mud",   to:"muddy"},
+          {from:"dust",  to:"dusty"},
+          {from:"wind",  to:"windy"},
+          {from:"storm", to:"stormy"},
+          {from:"luck",  to:"lucky"},
+          {from:"boss",  to:"bossy"},
+          {from:"cheek", to:"cheeky"},
+          {from:"arm",   to:"army"},
+        ]
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"The ___ chased its tail around the room.", ans:"puppy",  opts:["puppy","penny","party"],   ci:0},
+          {s:"It was so ___ that our hats blew off.",    ans:"windy",  opts:["wendy","windy","wintry"],  ci:1},
+          {s:"Do not ___, we can fix it together.",      ans:"cry",    opts:["dry","try","cry"],         ci:2},
+          {s:"A bird can ___ higher than a kite.",       ans:"fly",    opts:["fly","fry","shy"],         ci:0},
+          {s:"That joke was very ___.",                  ans:"funny",  opts:["fussy","funny","foggy"],   ci:1},
+          {s:"We were ___ to find a park right outside.",ans:"lucky",  opts:["licky","leaky","lucky"],   ci:2},
+          {s:"Please ___ your hands on the towel.",      ans:"dry",    opts:["dry","cry","sly"],         ci:0},
+          {s:"My whole ___ came to watch the game.",     ans:"family", opts:["finally","family","friendly"], ci:1},
+          {s:"He felt ___ about spilling the paint.",    ans:"sorry",  opts:["silly","soggy","sorry"],   ci:2},
+          {s:"The ___ was clear and blue all day.",      ans:"sky",    opts:["sky","spy","shy"],         ci:0},
+        ]
+      },
+      {
+        type:"scramble",
+        title:"Unscramble the Letters",
+        instr:"Rearrange the letters to spell a word from List 19.",
+        items:[
+          {sc:"HPYAP", w:"happy"},
+          {sc:"FYUNN", w:"funny"},
+          {sc:"YILSL", w:"silly"},
+          {sc:"PUYPP", w:"puppy"},
+          {sc:"WYIDN", w:"windy"},
+          {sc:"CYULK", w:"lucky"},
+          {sc:"IYMLFA", w:"family"},
+          {sc:"YARTP", w:"party"},
+          {sc:"OTYSMR", w:"stormy"},
+          {sc:"CHKYEE", w:"cheeky"},
+          {sc:"EPMYT", w:"empty"},
+          {sc:"BAYB", w:"baby"},
+        ]
+      }
+    ]
   },
   slides:[
     {s:"'y' as long /i/: short words"},
@@ -591,6 +717,61 @@ const LISTS = [
     if(w.includes("ee")) return "ee";
     return null;
   },
+  activity:{
+    title:"Vowel Teams ea / ee \u00b7 List 20",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"sort",
+        title:"Word Sort",
+        instr:"Both teams say long /e/. Sort each word by how it is spelt.",
+        words:["dream","green","beach","sleep","cream","three","teach","sweet","meal","street","leaf","wheel"],
+        groups:["ea","ee"],
+        answers:{
+          "ea":["dream","beach","cream","teach","meal","leaf"],
+          "ee":["green","sleep","three","sweet","street","wheel"],
+        }
+      },
+      {
+        type:"wordsearch",
+        title:"Word Search",
+        instr:"Find all twelve long /e/ words. They can go across, down, diagonally, and backwards.",
+        size:12, seed:20,
+        words:["dream","beach","cream","teach","green","sleep","sweet","street","wheel","three","steam","feast"]
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"We built a sandcastle at the ___.",        ans:"beach",  opts:["beach","bench","beak"],    ci:0},
+          {s:"I had a strange ___ last night.",          ans:"dream",  opts:["drain","dream","cream"],   ci:1},
+          {s:"The grass was bright ___ after the rain.", ans:"green",  opts:["grain","greet","green"],   ci:2},
+          {s:"Our ___ won the netball final.",           ans:"team",   opts:["team","teeth","treat"],    ci:0},
+          {s:"She likes to ___ before bed.",             ans:"read",   opts:["road","read","reed"],      ci:1},
+          {s:"We crossed the busy ___ at the lights.",   ans:"street", opts:["stream","steam","street"], ci:2},
+          {s:"The baby fell fast ___ in the car.",       ans:"asleep", opts:["asleep","aslope","astray"],ci:0},
+          {s:"Brush your ___ every morning.",            ans:"teeth",  opts:["teach","teeth","tooth"],   ci:1},
+          {s:"He ate a ___ treat after dinner.",         ans:"sweet",  opts:["sweat","swept","sweet"],   ci:2},
+          {s:"A ___ fell from the tall tree.",           ans:"leaf",   opts:["leaf","loaf","life"],      ci:0},
+        ]
+      },
+      {
+        type:"sentence",
+        title:"Build a Sentence",
+        instr:"Finish each sentence. The beginning has been started for you.",
+        bank:["beach","dream","green","street","sweet","sleep"],
+        items:[
+          {w:"beach",  starter:"At the beach we",      example:"At the beach we built a big sandcastle."},
+          {w:"dream",  starter:"Last night I had a dream about", example:"Last night I had a dream about flying."},
+          {w:"green",  starter:"The green grass",      example:"The green grass felt soft under my feet."},
+          {w:"street", starter:"We crossed the street", example:"We crossed the street at the lights."},
+          {w:"sweet",  starter:"The sweet treat",      example:"The sweet treat melted in the sun."},
+          {w:"sleep",  starter:"Before I sleep I",     example:"Before I sleep I read one short story."},
+        ]
+      }
+    ]
+  },
   slides:[
     {s:"'ea' makes long /e/ sound"},
     "eat","read","sea","bean","cream","dream","team","steam","beat","meat",
@@ -615,6 +796,69 @@ const LISTS = [
     if(w.includes("oa")) return "oa";
     if(w.includes("ow")) return "ow";
     return null;
+  },
+  activity:{
+    title:"Vowel Teams oa / ow \u00b7 List 21",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"sort",
+        title:"Word Sort",
+        instr:"Both teams say long /o/. Sort each word by how it is spelt.",
+        words:["boat","snow","coat","yellow","road","window","toast","elbow","float","shadow","goal","rainbow"],
+        groups:["oa","ow"],
+        answers:{
+          "oa":["boat","coat","road","toast","float","goal"],
+          "ow":["snow","yellow","window","elbow","shadow","rainbow"],
+        }
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"We rowed the ___ across the lake.",      ans:"boat",   opts:["boat","bout","beat"],       ci:0},
+          {s:"Put on your ___, it is cold outside.",   ans:"coat",   opts:["cost","coat","court"],      ci:1},
+          {s:"The ___ was covered in deep snow.",      ans:"road",   opts:["read","ride","road"],       ci:2},
+          {s:"A ___ appeared after the rain.",         ans:"rainbow",opts:["rainbow","raindrop","railway"], ci:0},
+          {s:"She looked out of the ___ at the birds.",ans:"window", opts:["widow","window","winner"],  ci:1},
+          {s:"Plants need sun and water to ___.",      ans:"grow",   opts:["glow","grew","grow"],       ci:2},
+          {s:"My ___ followed me along the wall.",     ans:"shadow", opts:["shadow","shallow","shower"],ci:0},
+          {s:"He scored the winning ___.",             ans:"goal",   opts:["gaol","goal","gold"],       ci:1},
+          {s:"I had ___ and jam for breakfast.",       ans:"toast",  opts:["taste","trust","toast"],    ci:2},
+          {s:"The ___ leaves fell from the tree.",     ans:"yellow", opts:["yellow","yelling","hollow"],ci:0},
+        ]
+      },
+      {
+        type:"oddoneout",
+        title:"Odd One Out",
+        instr:"Circle the word that does NOT make the long /o/ sound. Be ready to say why it is different.",
+        items:[
+          {words:["snow","blow","cow","grow"],        ans:"cow",   why:"here 'ow' says /ow/ as in 'out', not long /o/"},
+          {words:["show","throw","town","slow"],      ans:"town",  why:"here 'ow' says /ow/ as in 'out', not long /o/"},
+          {words:["yellow","follow","brown","hollow"],ans:"brown", why:"here 'ow' says /ow/ as in 'out', not long /o/"},
+          {words:["window","elbow","down","shadow"],  ans:"down",  why:"here 'ow' says /ow/ as in 'out', not long /o/"},
+          {words:["boat","coat","bought","road"],     ans:"bought",why:"'ough' says /or/ here, and there is no oa team"},
+          {words:["toast","roast","house","coast"],   ans:"house", why:"'ou' is a different vowel team, not oa"},
+          {words:["goat","load","loud","toad"],       ans:"loud",  why:"'ou' says /ow/ as in 'out', not long /o/"},
+          {words:["grow","crow","crowd","glow"],      ans:"crowd", why:"here 'ow' says /ow/ as in 'out', not long /o/"},
+        ]
+      },
+      {
+        type:"sentence",
+        title:"Build a Sentence",
+        instr:"Finish each sentence. The beginning has been started for you.",
+        bank:["boat","snow","window","rainbow","grow","yellow"],
+        items:[
+          {w:"boat",    starter:"The little boat",        example:"The little boat floated down the river."},
+          {w:"snow",    starter:"When it snows we",       example:"When it snows we build a snowman."},
+          {w:"window",  starter:"Out of the window I saw",example:"Out of the window I saw a tui in the tree."},
+          {w:"rainbow", starter:"A rainbow appeared",     example:"A rainbow appeared above the hills."},
+          {w:"grow",    starter:"Plants grow best when",  example:"Plants grow best when they get sun and water."},
+          {w:"yellow",  starter:"The yellow",             example:"The yellow flowers filled the garden."},
+        ]
+      }
+    ]
   },
   slides:[
     {s:"'oa' makes long /o/ sound"},
@@ -744,6 +988,61 @@ const LISTS = [
   num:23, title:"Vowel Team 'oo'",
   rule:"The vowel team 'oo' can make two sounds.\n'oo' as in 'good' (short) and 'oo' as in 'food' (long).",
   accent:"#2563eb", hlColor:"#1d4ed8", hl:"oo",
+  activity:{
+    title:"Vowel Team 'oo' \u00b7 List 23",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"sort",
+        title:"Word Sort",
+        instr:"Say each word aloud. Sort it by which 'oo' sound you hear.",
+        words:["good","food","book","moon","foot","room","look","spoon","wood","pool","cook","tooth"],
+        groups:["'oo' as in good","'oo' as in food"],
+        answers:{
+          "'oo' as in good":["good","book","foot","look","wood","cook"],
+          "'oo' as in food":["food","moon","room","spoon","pool","tooth"],
+        }
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"I read a ___ before bed each night.",     ans:"book",   opts:["book","boot","bank"],      ci:0},
+          {s:"The full ___ was bright last night.",     ans:"moon",   opts:["mood","moon","moor"],      ci:1},
+          {s:"She hurt her ___ playing netball.",       ans:"foot",   opts:["food","fool","foot"],      ci:2},
+          {s:"We tidied every ___ in the house.",       ans:"room",   opts:["room","roof","root"],      ci:0},
+          {s:"He ate his soup with a ___.",             ans:"spoon",  opts:["spool","spoon","spoke"],   ci:1},
+          {s:"Dad will ___ dinner tonight.",            ans:"cook",   opts:["crook","cool","cook"],     ci:2},
+          {s:"After ___ we walked home together.",      ans:"school", opts:["school","stool","shook"],  ci:0},
+          {s:"The chair is made of solid ___.",         ans:"wood",   opts:["wool","wood","would"],     ci:1},
+          {s:"My loose ___ finally came out.",          ans:"tooth",  opts:["tooth","truth","booth"],   ci:0},
+          {s:"We swam in the cool ___ all afternoon.",  ans:"pool",   opts:["pull","poll","pool"],      ci:2},
+        ]
+      },
+      {
+        type:"wordsearch",
+        title:"Word Search",
+        instr:"Find all twelve 'oo' words. They can go across, down, diagonally, and backwards.",
+        size:12, seed:23,
+        words:["book","look","good","foot","wood","cook","moon","room","food","pool","spoon","tooth"]
+      },
+      {
+        type:"sentence",
+        title:"Build a Sentence",
+        instr:"Finish each sentence. The beginning has been started for you.",
+        bank:["book","moon","school","spoon","pool","wood"],
+        items:[
+          {w:"book",   starter:"The book I am reading",  example:"The book I am reading is about sharks."},
+          {w:"moon",   starter:"Last night the moon",    example:"Last night the moon was big and bright."},
+          {w:"school", starter:"After school I",         example:"After school I walk home with my sister."},
+          {w:"spoon",  starter:"I used a spoon to",      example:"I used a spoon to stir the soup."},
+          {w:"pool",   starter:"At the pool we",         example:"At the pool we swam until it got cold."},
+          {w:"wood",   starter:"The wood was",           example:"The wood was smooth and warm to touch."},
+        ]
+      }
+    ]
+  },
   slides:[
     {s:"'oo' as in good: short sound"},
     "good","shook","stood","cool","hook","hood","foot","look",
@@ -887,6 +1186,71 @@ const LISTS = [
     for(const c of ["str","spr","scr","spl"]) if(w.startsWith(c)) return c;
     return null;
   },
+  activity:{
+    title:"3-Letter Clusters \u00b7 List 25",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"sort",
+        title:"Word Sort",
+        instr:"Sort each word by the three-letter cluster it starts with.",
+        words:["string","spring","scream","splash","street","spray","scratch","split","strong","sprout","scrub","splendid"],
+        groups:["str","spr","scr","spl"],
+        answers:{
+          "str":["string","street","strong"],
+          "spr":["spring","spray","sprout"],
+          "scr":["scream","scratch","scrub"],
+          "spl":["splash","split","splendid"],
+        }
+      },
+      {
+        type:"missing",
+        title:"Missing Letters",
+        instr:"Fill in the missing letters, then write the whole word on the line.",
+        bank:["stream","sprout","scream","splash","street","spring","scratch","split","strong","scrub","spray","strap"],
+        items:[
+          {q:"str__m",  w:"stream"},
+          {q:"spr__t",  w:"sprout"},
+          {q:"scr__m",  w:"scream"},
+          {q:"spl__h",  w:"splash"},
+          {q:"str__t",  w:"street"},
+          {q:"spr__g",  w:"spring"},
+          {q:"scr__ch", w:"scratch"},
+          {q:"spl_t",   w:"split"},
+          {q:"str__g",  w:"strong"},
+          {q:"scr_b",   w:"scrub"},
+          {q:"spr_y",   w:"spray"},
+          {q:"str_p",   w:"strap"},
+        ]
+      },
+      {
+        type:"scramble",
+        title:"Unscramble the Letters",
+        instr:"Rearrange the letters to spell a word from List 25.",
+        items:[
+          {sc:"TSAPR", w:"strap"},
+          {sc:"IRPST", w:"strip"},
+          {sc:"TEERTS", w:"street"},
+          {sc:"IGRSPN", w:"spring"},
+          {sc:"SAPYR", w:"spray"},
+          {sc:"UOSPTR", w:"sprout"},
+          {sc:"CRSBU", w:"scrub"},
+          {sc:"CRSAP", w:"scrap"},
+          {sc:"RCWES", w:"screw"},
+          {sc:"SPSHLA", w:"splash"},
+          {sc:"TILPS", w:"split"},
+          {sc:"ATSLP", w:"splat"},
+        ]
+      },
+      {
+        type:"wordsearch",
+        title:"Word Search",
+        instr:"Find all twelve cluster words. They can go across, down, diagonally, and backwards.",
+        size:12, seed:25,
+        words:["string","spring","scream","splash","street","spray","scratch","split","strong","sprout","scrub","strap"]
+      }
+    ]
+  },
   slides:[
     {s:"str: strap, string, street"},
     "strap","strip","string","street","stream","stripe","strain",
@@ -912,6 +1276,73 @@ const LISTS = [
     if(w.includes("oi")) return "oi";
     if(w.includes("oy")) return "oy";
     return null;
+  },
+  activity:{
+    title:"Vowel Teams oi / oy \u00b7 List 26",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"sort",
+        title:"Word Sort",
+        instr:"Both teams say /oi/. Sort each word by how it is spelt.",
+        words:["coin","boy","point","enjoy","soil","toy","noise","royal","join","annoy","voice","destroy"],
+        groups:["oi","oy"],
+        answers:{
+          "oi":["coin","point","soil","noise","join","voice"],
+          "oy":["boy","enjoy","toy","royal","annoy","destroy"],
+        }
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"He found a shiny ___ on the path.",        ans:"coin",    opts:["coin","corn","cone"],        ci:0},
+          {s:"Please ___ us at the table.",              ans:"join",    opts:["joint","join","joy"],        ci:1},
+          {s:"We planted the seeds in rich ___.",        ans:"soil",    opts:["sail","soul","soil"],        ci:2},
+          {s:"The ___ from the road woke me up.",        ans:"noise",   opts:["noise","nose","news"],       ci:0},
+          {s:"Do not ___ the surprise for her.",         ans:"spoil",   opts:["spool","spoil","spill"],     ci:1},
+          {s:"I really ___ playing football.",           ans:"enjoy",   opts:["employ","annoy","enjoy"],    ci:2},
+          {s:"She put her favourite ___ in the box.",    ans:"toy",     opts:["toy","tow","try"],           ci:0},
+          {s:"Wash your hands, they are ___.",           ans:"moist",   opts:["most","moist","mist"],       ci:1},
+          {s:"He drew an arrow to ___ the way.",         ans:"point",   opts:["paint","pint","point"],      ci:2},
+          {s:"Her ___ was soft but clear.",              ans:"voice",   opts:["voice","vice","vase"],       ci:0},
+        ]
+      },
+      {
+        type:"scramble",
+        title:"Unscramble the Letters",
+        instr:"Rearrange the letters to spell a word from List 26.",
+        items:[
+          {sc:"CNOI", w:"coin"},
+          {sc:"OJNI", w:"join"},
+          {sc:"PNOIT", w:"point"},
+          {sc:"SOENI", w:"noise"},
+          {sc:"IVOEC", w:"voice"},
+          {sc:"OECIHC", w:"choice"},
+          {sc:"LPSIO", w:"spoil"},
+          {sc:"IAODV", w:"avoid"},
+          {sc:"JEOYN", w:"enjoy"},
+          {sc:"NYAON", w:"annoy"},
+          {sc:"LOARY", w:"royal"},
+          {sc:"RETYOS", w:"oyster"},
+        ]
+      },
+      {
+        type:"sentence",
+        title:"Build a Sentence",
+        instr:"Finish each sentence. The beginning has been started for you.",
+        bank:["coin","noise","enjoy","point","toy","soil"],
+        items:[
+          {w:"coin",  starter:"I found a coin",       example:"I found a coin under the car seat."},
+          {w:"noise", starter:"The noise outside",    example:"The noise outside kept me awake."},
+          {w:"enjoy", starter:"I really enjoy",       example:"I really enjoy playing football at lunchtime."},
+          {w:"point", starter:"She used her finger to point", example:"She used her finger to point at the map."},
+          {w:"toy",   starter:"My favourite toy",     example:"My favourite toy is a small wooden truck."},
+          {w:"soil",  starter:"We dug the soil",      example:"We dug the soil before planting the seeds."},
+        ]
+      }
+    ]
   },
   slides:[
     {s:"'oi': coin, boil, point"},
@@ -1060,6 +1491,63 @@ const LISTS = [
     if(/ur/.test(w)) return "ur";
     return null;
   },
+  activity:{
+    title:"R-Controlled er / ir / ur \u00b7 List 28",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"sort",
+        title:"Word Sort",
+        instr:"All three groups say /er/. Sort each word by how it is spelt.",
+        words:["her","bird","burn","fern","girl","turn","serve","shirt","nurse","term","first","purple"],
+        groups:["er","ir","ur"],
+        answers:{
+          "er":["her","fern","serve","term"],
+          "ir":["bird","girl","shirt","first"],
+          "ur":["burn","turn","nurse","purple"],
+        }
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"A small ___ sat on the fence.",          ans:"bird",   opts:["bird","bard","bored"],      ci:0},
+          {s:"The ___ checked my sore arm.",           ans:"nurse",  opts:["horse","nurse","purse"],    ci:1},
+          {s:"She came ___ in the cross country.",     ans:"first",  opts:["forest","fastest","first"], ci:2},
+          {s:"Please ___ off the tap.",                ans:"turn",   opts:["turn","torn","tern"],       ci:0},
+          {s:"He wore a ___ shirt to the party.",      ans:"purple", opts:["people","purple","pimple"], ci:1},
+          {s:"The ___ ran ahead of the group.",        ans:"girl",   opts:["grill","gull","girl"],      ci:2},
+          {s:"Do not ___ your hand on the stove.",     ans:"burn",   opts:["burn","barn","born"],       ci:0},
+          {s:"A green ___ grew beside the path.",      ans:"fern",   opts:["farm","fern","firm"],       ci:1},
+          {s:"It is my ___ to bat next.",              ans:"turn",   opts:["torn","tarn","turn"],       ci:2},
+          {s:"We walked past the old stone ___.",      ans:"church", opts:["church","chirp","charge"],  ci:0},
+        ]
+      },
+      {
+        type:"wordsearch",
+        title:"Word Search",
+        instr:"Find all twelve /er/ words. They can go across, down, diagonally, and backwards.",
+        size:12, seed:28,
+        words:["bird","girl","shirt","first","burn","turn","nurse","purple","fern","serve","church","turtle"]
+      },
+      {
+        type:"proofread",
+        title:"Find the Mistake",
+        instr:"Each sentence has ONE word with the wrong /er/ spelling. Circle it, then write it correctly.",
+        items:[
+          {s:"The gerl ran to the gate.",            wrong:"gerl",   right:"girl"},
+          {s:"A small burd sat on the fence.",       wrong:"burd",   right:"bird"},
+          {s:"He wore a purple shurt to school.",    wrong:"shurt",  right:"shirt"},
+          {s:"The nerse checked my sore arm.",       wrong:"nerse",  right:"nurse"},
+          {s:"She came ferst in the cross country.", wrong:"ferst",  right:"first"},
+          {s:"Please tirn off the tap.",             wrong:"tirn",   right:"turn"},
+          {s:"My leg did not hert at all.",          wrong:"hert",   right:"hurt"},
+          {s:"We walked past the old cherch.",       wrong:"cherch", right:"church"},
+        ]
+      }
+    ]
+  },
   slides:[
     {s:"'er': her, fern, term"},
     "her","term","fern","verb","stern","germ","nerve","serve","perch","clerk",
@@ -1176,6 +1664,78 @@ const LISTS = [
     if(w.endsWith("ar")) return "ar";
     return null;
   },
+  activity:{
+    title:"Schwa 'er' at End of Word \u00b7 List 30",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"transform",
+        title:"Make the Person Word",
+        instr:"Add the ending to each base word to name the person who does it. Careful: one of them uses -or, and one needs a doubled letter.",
+        items:[
+          {from:"teach", to:"teacher"},
+          {from:"farm",  to:"farmer"},
+          {from:"dance", to:"dancer"},
+          {from:"play",  to:"player"},
+          {from:"win",   to:"winner"},
+          {from:"act",   to:"actor"},
+        ]
+      },
+      {
+        type:"match",
+        title:"Match the Meaning",
+        instr:"Write the correct meaning from the box next to each word.",
+        leftHead:"Word",
+        tip:"Tip: Each meaning is used once.",
+        bank:["helps you learn","comes first","moves to music","a parent","helps you when you are sick",
+              "performs in a play","looks after animals and crops","takes part in a game",
+              "a girl in your family","a boy in your family"],
+        pairs:[
+          {l:"teacher", r:"helps you learn"},
+          {l:"farmer",  r:"looks after animals and crops"},
+          {l:"dancer",  r:"moves to music"},
+          {l:"doctor",  r:"helps you when you are sick"},
+          {l:"actor",   r:"performs in a play"},
+          {l:"player",  r:"takes part in a game"},
+          {l:"winner",  r:"comes first"},
+          {l:"sister",  r:"a girl in your family"},
+          {l:"brother", r:"a boy in your family"},
+          {l:"mother",  r:"a parent"},
+        ]
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"My ___ helped me with my reading.",       ans:"teacher", opts:["teacher","teaches","teaching"], ci:0},
+          {s:"We swam in the cold ___ all morning.",    ans:"water",   opts:["winter","water","waiter"],      ci:1},
+          {s:"Loud ___ rolled across the sky.",         ans:"thunder", opts:["thunders","thinner","thunder"], ci:2},
+          {s:"A yellow ___ grew by the fence.",         ans:"flower",  opts:["flower","flour","floor"],       ci:0},
+          {s:"In ___ the mornings are very cold.",      ans:"winter",  opts:["winner","winter","wonder"],     ci:1},
+          {s:"My big ___ walks me to school.",          ans:"brother", opts:["bother","bolder","brother"],    ci:2},
+          {s:"We sat in the ___ of the room.",          ans:"corner",  opts:["corner","coroner","cornea"],    ci:0},
+          {s:"She spread ___ on her toast.",            ans:"butter",  opts:["bitter","butter","batter"],     ci:1},
+          {s:"He climbed the ___ to reach the roof.",   ans:"ladder",  opts:["louder","leather","ladder"],    ci:2},
+          {s:"They walked home ___ after the game.",    ans:"together",opts:["together","tomorrow","tougher"],ci:0},
+        ]
+      },
+      {
+        type:"sentence",
+        title:"Build a Sentence",
+        instr:"Finish each sentence. The beginning has been started for you.",
+        bank:["teacher","water","flower","winter","brother","together"],
+        items:[
+          {w:"teacher",  starter:"My teacher",          example:"My teacher helped me finish my story."},
+          {w:"water",    starter:"The water in the river", example:"The water in the river was cold and clear."},
+          {w:"flower",   starter:"A flower grew",       example:"A flower grew right beside the gate."},
+          {w:"winter",   starter:"In winter we",        example:"In winter we wear jackets to school."},
+          {w:"brother",  starter:"My brother",          example:"My brother plays football every Saturday."},
+          {w:"together", starter:"We walked home together", example:"We walked home together after the game."},
+        ]
+      }
+    ]
+  },
   slides:[
     {s:"family and people: schwa /er/"},
     "sister","brother","mother","father","teacher","farmer","dancer","player","doctor","actor",
@@ -1198,6 +1758,83 @@ const LISTS = [
   num:31, title:"Prefix un– (not)",
   rule:"A prefix is a group of letters placed before the base word.\n'un–' means NOT or the OPPOSITE of the base word.",
   accent:"#4f46e5", hlColor:"#3730a3", hl:"un",
+  activity:{
+    title:"Prefix un- \u00b7 List 31",
+    subtitle:"Follow-up Activities",
+    sections:[
+      {
+        type:"transform",
+        title:"Add the Prefix",
+        instr:"Add the prefix 'un' to the front of each base word. The spelling of the base word never changes.",
+        items:[
+          {from:"happy", to:"unhappy"},
+          {from:"kind",  to:"unkind"},
+          {from:"safe",  to:"unsafe"},
+          {from:"fair",  to:"unfair"},
+          {from:"tidy",  to:"untidy"},
+          {from:"lock",  to:"unlock"},
+          {from:"pack",  to:"unpack"},
+          {from:"tie",   to:"untie"},
+          {from:"well",  to:"unwell"},
+          {from:"able",  to:"unable"},
+          {from:"even",  to:"uneven"},
+          {from:"lucky", to:"unlucky"},
+        ]
+      },
+      {
+        type:"match",
+        title:"Match the Meaning",
+        instr:"Write the correct meaning from the box next to each word.",
+        leftHead:"Word",
+        tip:"Tip: Each meaning is used once.",
+        bank:["not happy","not kind","not safe","not tidy","to open a lock",
+              "to take things out of a bag","to undo a knot","not feeling well","not fair","not level or flat"],
+        pairs:[
+          {l:"unhappy", r:"not happy"},
+          {l:"unkind",  r:"not kind"},
+          {l:"unsafe",  r:"not safe"},
+          {l:"untidy",  r:"not tidy"},
+          {l:"unlock",  r:"to open a lock"},
+          {l:"unpack",  r:"to take things out of a bag"},
+          {l:"untie",   r:"to undo a knot"},
+          {l:"unwell",  r:"not feeling well"},
+          {l:"unfair",  r:"not fair"},
+          {l:"uneven",  r:"not level or flat"},
+        ]
+      },
+      {
+        type:"cloze",
+        title:"Cloze Sentences",
+        instr:"Circle the correct word to complete each sentence.",
+        items:[
+          {s:"It is ___ to leave someone out of the game.", ans:"unkind",  opts:["unkind","unwell","unpack"],   ci:0},
+          {s:"He had to ___ the gate before going in.",     ans:"unlock",  opts:["unload","unlock","unlucky"],  ci:1},
+          {s:"She felt ___ and stayed home from school.",   ans:"unwell",  opts:["unreal","unfair","unwell"],   ci:2},
+          {s:"Please ___ your bag and put things away.",    ans:"unpack",  opts:["unpack","unplug","unzip"],    ci:0},
+          {s:"The path was ___ and hard to walk on.",       ans:"uneven",  opts:["unable","uneven","unusual"],  ci:1},
+          {s:"It is ___ that only one team gets a turn.",   ans:"unfair",  opts:["unfit","unsafe","unfair"],    ci:2},
+          {s:"My room was ___ so I cleaned it up.",         ans:"untidy",  opts:["untidy","untie","unwanted"],  ci:0},
+          {s:"He was ___ to reach the top shelf.",          ans:"unable",  opts:["unlike","unable","unclear"],  ci:1},
+          {s:"Can you ___ this knot for me?",               ans:"untie",   opts:["untidy","unzip","untie"],     ci:2},
+          {s:"Running on the wet deck is ___.",             ans:"unsafe",  opts:["unsafe","unsure","unfit"],    ci:0},
+        ]
+      },
+      {
+        type:"sentence",
+        title:"Build a Sentence",
+        instr:"Finish each sentence. The beginning has been started for you.",
+        bank:["unkind","unlock","unpack","unfair","untidy","unwell"],
+        items:[
+          {w:"unkind", starter:"It is unkind to",     example:"It is unkind to laugh at someone's mistake."},
+          {w:"unlock", starter:"I had to unlock",     example:"I had to unlock the gate before going in."},
+          {w:"unpack", starter:"When I got home I unpacked", example:"When I got home I unpacked my school bag."},
+          {w:"unfair", starter:"I think it is unfair when", example:"I think it is unfair when only one team plays."},
+          {w:"untidy", starter:"My room was untidy so", example:"My room was untidy so I tidied it up."},
+          {w:"unwell", starter:"She felt unwell and",  example:"She felt unwell and stayed home from school."},
+        ]
+      }
+    ]
+  },
   slides:[
     {s:"un– means NOT or opposite"},
     "undo","unzip","unpack","unwrap","unclear","unkind","unhappy","unsafe",
