@@ -498,7 +498,7 @@ const LISTS = [
         cards:["any","also","ask","ever","many","very","help","their",
                "through","bought","really","hour","gone","never","always","house",
                "eyes","more","once","our","fast","last","I","we",
-               "the","to","and","my","was","is"],
+               "the","to","and","my","was","is","a","."],
         frames:[
           "1. Build a sentence using the cards: their + house",
           "2. Build a sentence using the cards: always + help",
@@ -1665,7 +1665,7 @@ function openActivity(idx){
   act.style.setProperty("--act-bold",   L.accent);
   // title
   document.getElementById("act-topbar-title").textContent =
-    `List ${L.num} · ${L.title} · Activities`;
+    `${L.badge || 'List ' + L.num} · ${L.title} · Activities`;
   document.getElementById("act-content").innerHTML = buildActivityFor(L);
   document.getElementById("main").style.display = "none";
   act.style.display = "block";
