@@ -100,7 +100,7 @@ body{background:#f4f0fc;}
 /* sv-main = stage + nav */
 #sv-main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
 
-/* stage — fills all remaining height */
+/* stage - fills all remaining height */
 .stage{
   flex:1;display:flex;align-items:stretch;justify-content:center;
   overflow:hidden;padding:0;
@@ -408,7 +408,7 @@ const LISTS = [
   sentences:[
     "She also asked for help many times.",
     "Their eyes went through the house very fast.",
-    "We always go once more — never last."
+    "We always go once more, never last."
   ]
 },
 {
@@ -445,9 +445,9 @@ const LISTS = [
     return null;
   },
   slides:[
-    {s:"'y' as long /i/ — short words"},
+    {s:"'y' as long /i/: short words"},
     "cry","shy","sky","dry","fry","my","fly","try","by","sly","spy","July","deny","rely","supply",
-    {s:"'y' as long /e/ — longer words"},
+    {s:"'y' as long /e/: longer words"},
     "happy","funny","silly","cheeky","puppy","tidy",
     "family","empty","party","sorry",
     "nobody","merry","windy","dusty","lucky",
@@ -514,13 +514,13 @@ const LISTS = [
   accent:"#dc2626", hlColor:"#b91c1c", hl:null,
   slides:[
     {s:"to / two / too"},
-    {w:"to",sub:"direction — go to school"},
+    {w:"to",sub:"direction: go to school"},
     {w:"two",sub:"the number 2"},
-    {w:"too",sub:"also / very — me too"},
+    {w:"too",sub:"also / very: me too"},
     {s:"there / their / they're"},
-    {w:"there",sub:"a place — over there"},
+    {w:"there",sub:"a place: over there"},
     {w:"their",sub:"belonging to them"},
-    {w:"they're",sub:"they are — they're happy"},
+    {w:"they're",sub:"they are: they're happy"},
     {s:"more homophones"},
     {w:"here",sub:"this place"},{w:"hear",sub:"with your ears"},
     {w:"where",sub:"which place"},{w:"wear",sub:"put on clothes"},
@@ -547,11 +547,11 @@ const LISTS = [
   rule:"The vowel team 'oo' can make two sounds.\n'oo' as in 'good' (short) and 'oo' as in 'food' (long).",
   accent:"#2563eb", hlColor:"#1d4ed8", hl:"oo",
   slides:[
-    {s:"'oo' as in good — short sound"},
+    {s:"'oo' as in good: short sound"},
     "good","shook","stood","cool","hook","hood","foot","look",
     "took","wool","book","school","wood","brook","cook","nook",
     "crook","soot","cookbook","outlook",
-    {s:"'oo' as in food — long sound"},
+    {s:"'oo' as in food: long sound"},
     "food","moon","roof","room","shoot","boom","soon","zoom",
     "gloom","too","spoon","root","balloon","igloo","kangaroo",
     "bloom","broom","pool","fool","stool","drool","spool","tooth","smooth"
@@ -690,14 +690,14 @@ const LISTS = [
     return null;
   },
   slides:[
-    {s:"str — strap, string, street"},
+    {s:"str: strap, string, street"},
     "strap","strip","string","street","stream","stripe","strain",
     "straw","strong","strum","struck","straight",
-    {s:"spr — spring, spray, sprout"},
+    {s:"spr: spring, spray, sprout"},
     "spring","sprint","sprain","sprite","spray","sprout","spread","sprinkle","sprung","spree",
-    {s:"scr — scrum, scratch, scream"},
+    {s:"scr: scrum, scratch, scream"},
     "scrum","scrub","scrap","scream","scrape","scratch","script","scroll","scrawl","screw",
-    {s:"spl — splash, split, splendid"},
+    {s:"spl: splash, split, splendid"},
     "splash","split","splint","splat","splendid","spleen","splurge","splay"
   ],
   sentences:[
@@ -716,18 +716,18 @@ const LISTS = [
     return null;
   },
   slides:[
-    {s:"'oi' — coin, boil, point"},
+    {s:"'oi': coin, boil, point"},
     "oil","boil","coin","join","point","soil","foil","toil","coil","joint",
     "moist","hoist","broil","spoil","avoid","poison","noise","voice","choice",
     "boiling","joining","pointed","spoiled","poisoned","appoint","rejoin",
-    {s:"'oy' — boy, joy, enjoy"},
+    {s:"'oy': boy, joy, enjoy"},
     "boy","joy","toy","Roy","destroy","enjoy","employ","annoy",
     "royal","loyal","oyster","decoy","cowboy","ploy","soy","joyful"
   ],
   sentences:[
     "The boy found a coin in the soil.",
     "Roy made a loud noise with his toy.",
-    "Don't spoil the joy — enjoy the choice."
+    "Don't spoil the joy. Enjoy the choice."
   ]
 },
 {
@@ -799,11 +799,11 @@ const LISTS = [
         title:"Word Sort",
         instr:"Sort each contraction into the correct group.",
         words:["I'm","I'll","I've","you're","you've","you'll","he's","he'd","she'll","they're","they've","isn't","aren't","wasn't","weren't","can't","won't","didn't"],
-        groups:["I—","you—","he/she/they—","n't (negative)"],
+        groups:["I","you","he/she/they","n't (negative)"],
         answers:{
-          "I—":            ["I'm","I'll","I've"],
-          "you—":          ["you're","you've","you'll"],
-          "he/she/they—":  ["he's","he'd","she'll","they're","they've"],
+          "I":            ["I'm","I'll","I've"],
+          "you":          ["you're","you've","you'll"],
+          "he/she/they":  ["he's","he'd","she'll","they're","they've"],
           "n't (negative)":["isn't","aren't","wasn't","weren't","can't","won't","didn't"],
         }
       },
@@ -849,12 +849,12 @@ const LISTS = [
   sentences:[
     "I'm sure you'll love this book.",
     "She's going to the park after school.",
-    "Don't forget — we're meeting at the library."
+    "Don't forget, we're meeting at the library."
   ]
 },
 {
   num:28, title:"R-Controlled: er · ir · ur",
-  rule:"When 'r' follows the vowels e, i, u — the vowel sound changes to /er/.\nThe 'r' controls the vowel sound.",
+  rule:"When 'r' follows the vowels e, i, u, the vowel sound changes to /er/.\nThe 'r' controls the vowel sound.",
   accent:"#b45309", hlColor:"#78350f", hl:null,
   hlFn: w=>{
     if(/er/.test(w)) return "er";
@@ -863,13 +863,13 @@ const LISTS = [
     return null;
   },
   slides:[
-    {s:"'er' — her, fern, term"},
+    {s:"'er': her, fern, term"},
     "her","term","fern","verb","stern","germ","nerve","serve","perch","clerk",
     "verse","merge","prefer","infer","expert","alert","concern","desert","insert",
-    {s:"'ir' — bird, girl, shirt"},
+    {s:"'ir': bird, girl, shirt"},
     "bird","girl","shirt","first","birth","third","stir","firm","sir","swirl",
     "whirl","flirt","squirt","thirst","twirl","chirp","dirty","thirty","birthday","circuit",
-    {s:"'ur' — burn, turn, hurt"},
+    {s:"'ur': burn, turn, hurt"},
     "burn","turn","hurt","burst","fur","curl","surf","nurse","purse","church",
     "curve","lurk","blur","turkey","purple","turtle","Thursday","during","return","suburb","disturb","urgent"
   ],
@@ -880,11 +880,11 @@ const LISTS = [
   ]
 },
 {
-  num:29, title:"Syllable Division — Trumpet Rule",
-  rule:"Words with the pattern VCCV are divided between the two consonants.\ntrum / pet — this helps us read and spell longer words.",
+  num:29, title:"Syllable Division: Trumpet Rule",
+  rule:"Words with the pattern VCCV are divided between the two consonants.\ntrum / pet. This helps us read and spell longer words.",
   accent:"#0d9488", hlColor:"#0f766e", hl:null,
   slides:[
-    {s:"VC·CV — divide between the two consonants"},
+    {s:"VC·CV: divide between the two consonants"},
     {w:"trumpet",syl:"trum·pet"},{w:"basket",syl:"bas·ket"},{w:"rabbit",syl:"rab·bit"},
     {w:"mitten",syl:"mit·ten"},{w:"butter",syl:"but·ter"},{w:"dinner",syl:"din·ner"},
     {w:"letter",syl:"let·ter"},{w:"better",syl:"bet·ter"},{w:"matter",syl:"mat·ter"},
@@ -910,7 +910,7 @@ const LISTS = [
 },
 {
   num:30, title:"Schwa 'er' at End of Word",
-  rule:"The unstressed syllable at the end of a word loses its pure vowel sound.\nIt sounds like a soft, short /u/ — this is called the schwa.",
+  rule:"The unstressed syllable at the end of a word loses its pure vowel sound.\nIt sounds like a soft, short /u/. This is called the schwa.",
   accent:"#db2777", hlColor:"#be185d", hl:null,
   hlFn: w=>{
     if(w.endsWith("er")) return "er";
@@ -919,7 +919,7 @@ const LISTS = [
     return null;
   },
   slides:[
-    {s:"family and people — schwa /er/"},
+    {s:"family and people: schwa /er/"},
     "sister","brother","mother","father","teacher","farmer","dancer","player","doctor","actor",
     {s:"nature and place words"},
     "water","river","flower","tower","shower","thunder","winter","summer","corner","center",
@@ -1254,9 +1254,9 @@ function buildSidebar(){
     else if(s.sentence) label = s.label;
     else if(s.word) label = s.word;
     else{
-      // section slide — extract h3 text
+      // section slide - extract h3 text
       const m = s.html.match(/<h3[^>]*>([\s\S]*?)<\/h3>/);
-      label = m ? m[1].replace(/<[^>]+>/g,"").trim() : "—";
+      label = m ? m[1].replace(/<[^>]+>/g,"").trim() : "Section";
     }
     const sentCls = s.sentence ? " sb-sentence" : "";
     return `<div class="sb-item${i===curIdx?" on":""}${sentCls}" onclick="goTo(${i})">
@@ -1333,7 +1333,7 @@ document.addEventListener("keydown",e=>{
 });
 
 // ══════════════════════════════════════════════════════
-//  ACTIVITY PAGE — data-driven, per list
+//  ACTIVITY PAGE - data-driven, per list
 // ══════════════════════════════════════════════════════
 let curActivityListIdx = null;
 
@@ -1351,7 +1351,7 @@ function openActivity(idx){
   act.style.setProperty("--act-bold",   L.accent);
   // title
   document.getElementById("act-topbar-title").textContent =
-    `List ${L.num} · ${L.title} — Activities`;
+    `List ${L.num} · ${L.title} · Activities`;
   document.getElementById("act-content").innerHTML = buildActivityFor(L);
   document.getElementById("main").style.display = "none";
   act.style.display = "block";
@@ -1385,7 +1385,7 @@ function buildActivityFor(L){
 }
 
 function renderActivitySection(sec, n){
-  const head = `<h2>Activity ${n} — ${sec.title}</h2><p class="act-instr">${sec.instr || ''}</p>`;
+  const head = `<h2>Activity ${n}: ${sec.title}</h2><p class="act-instr">${sec.instr || ''}</p>`;
   switch(sec.type){
     case 'cloze':     return head + renderCloze(sec);
     case 'scramble':  return head + renderScramble(sec);
